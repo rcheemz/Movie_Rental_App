@@ -23,3 +23,6 @@ C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\bin\Debug\net8
 C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Data.SqlClient.dll
 C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8.0-windows\Project291_Team3.csproj.AssemblyReference.cache
 C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8.0-windows\Project2.7CF32421.Up2Date
+C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8.0-windows\Project291_Team3.sourcelink.json
+C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8.0-windows\Project291_Team3.CreateCustomer.resources
+C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8.0-windows\Project291_Team3.CustomerDetailsForm.resources
