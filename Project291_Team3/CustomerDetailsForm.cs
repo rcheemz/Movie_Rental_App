@@ -27,20 +27,27 @@ namespace Project291_Team3
         {
 
         }
+
+        /**
+         * This will load the customer details by fetching from database server
+         */
         private void LoadCustomerDetails()
         {
+
+            // Just in case connection is lost to the database
             if (myConnection == null)
             {
                 MessageBox.Show("Database connection is not established.");
                 return;
             }
 
-            // Ensure the connection is closed before opening
+            // Ensure the connection is closed before opening this is very important or else it doesnt load for somereason kept getting error
             if (myConnection.State == System.Data.ConnectionState.Open)
             {
                 myConnection.Close();
             }
-
+            
+            // SQL query
             string query = @"
                 SELECT c.FirstName, c.LastName, c.StreetAddress, c.City, c.StateOrProvince, 
                        c.Country, c.ZipCode, c.Email, c.AccountNumber, c.CreditCardNumber, 
@@ -51,16 +58,20 @@ namespace Project291_Team3
                 GROUP BY c.FirstName, c.LastName, c.StreetAddress, c.City, c.StateOrProvince, 
                          c.Country, c.ZipCode, c.Email, c.AccountNumber, c.CreditCardNumber";
 
+
+            // create a SqlCommand object to execute the SQL query
+            // uses my connection insure the command is automatically closed after ecxecution
             using (SqlCommand cmd = new SqlCommand(query, myConnection))
             {
                 cmd.Parameters.AddWithValue("@CustomerID", customerID);
 
                 myConnection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader(); 
 
+                // read data
                 if (reader.Read())
                 {
-                    // Display Customer Data in Labels or TextBoxes
+                    // Display Customer Data in Labels
                     firstNameLabel.Text = reader["FirstName"].ToString();
                     lastNameLabel.Text = reader["LastName"].ToString();
                     streetLabel.Text = reader["StreetAddress"].ToString();

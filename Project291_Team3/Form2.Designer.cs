@@ -34,6 +34,7 @@
             bindingSource1 = new BindingSource(components);
             customerSearchButton = new Button();
             customerDataGridView = new DataGridView();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customerDataGridView).BeginInit();
             SuspendLayout();
@@ -50,11 +51,10 @@
             // 
             // customerPhoneInput
             // 
-            customerPhoneInput.Location = new Point(36, 49);
+            customerPhoneInput.Location = new Point(291, 49);
             customerPhoneInput.Name = "customerPhoneInput";
-            customerPhoneInput.Size = new Size(545, 35);
+            customerPhoneInput.Size = new Size(314, 35);
             customerPhoneInput.TabIndex = 1;
-            customerPhoneInput.Text = "Enter Customer Phone";
             customerPhoneInput.TextChanged += customerPhoneInput_TextChanged;
             // 
             // customerSearchButton
@@ -77,11 +77,21 @@
             customerDataGridView.TabIndex = 3;
             customerDataGridView.CellContentClick += customerDataGridView_CellDoubleClick;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(36, 54);
+            label1.Name = "label1";
+            label1.Size = new Size(249, 30);
+            label1.TabIndex = 4;
+            label1.Text = "Enter Customer Number: ";
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
             Controls.Add(customerDataGridView);
             Controls.Add(customerSearchButton);
             Controls.Add(customerPhoneInput);
@@ -102,5 +112,6 @@
         private BindingSource bindingSource1;
         private Button customerSearchButton;
         private DataGridView customerDataGridView;
+        private Label label1;
     }
 }
