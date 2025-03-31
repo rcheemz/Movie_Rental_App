@@ -28,69 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            usernameLabel = new Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             username = new TextBox();
             password = new TextBox();
-            passwordLabel = new Label();
             loginButton = new Button();
+            label1 = new Label();
             SuspendLayout();
-            // 
-            // usernameLabel
-            // 
-            usernameLabel.AutoSize = true;
-            usernameLabel.Location = new Point(223, 124);
-            usernameLabel.Name = "usernameLabel";
-            usernameLabel.Size = new Size(135, 30);
-            usernameLabel.TabIndex = 0;
-            usernameLabel.Text = "Username    :";
-            usernameLabel.Click += usernameLabel_Click;
             // 
             // username
             // 
-            username.Location = new Point(364, 124);
+            username.Location = new Point(647, 270);
+            username.Margin = new Padding(6, 5, 6, 5);
             username.Name = "username";
-            username.Size = new Size(175, 35);
+            username.Size = new Size(360, 59);
             username.TabIndex = 1;
             username.TextChanged += username_TextChanged;
             // 
             // password
             // 
-            password.Location = new Point(364, 165);
+            password.Location = new Point(647, 341);
+            password.Margin = new Padding(6, 5, 6, 5);
             password.Name = "password";
-            password.Size = new Size(175, 35);
+            password.Size = new Size(360, 59);
             password.TabIndex = 3;
             password.TextChanged += password_TextChanged;
             // 
-            // passwordLabel
-            // 
-            passwordLabel.AutoSize = true;
-            passwordLabel.Location = new Point(224, 165);
-            passwordLabel.Name = "passwordLabel";
-            passwordLabel.Size = new Size(134, 30);
-            passwordLabel.TabIndex = 2;
-            passwordLabel.Text = "Password     :";
-            passwordLabel.Click += passwordLabel_Click;
-            // 
             // loginButton
             // 
-            loginButton.Location = new Point(387, 217);
+            loginButton.ForeColor = Color.FromArgb(0, 192, 0);
+            loginButton.Location = new Point(695, 431);
+            loginButton.Margin = new Padding(6, 5, 6, 5);
             loginButton.Name = "loginButton";
-            loginButton.Size = new Size(131, 40);
+            loginButton.Size = new Size(273, 69);
             loginButton.TabIndex = 4;
             loginButton.Text = "Login";
             loginButton.UseVisualStyleBackColor = true;
             loginButton.Click += loginButton_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.NavajoWhite;
+            label1.Font = new Font("Berlin Sans FB", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(191, 141);
+            label1.Margin = new Padding(6, 0, 6, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(1252, 92);
+            label1.TabIndex = 5;
+            label1.Text = "Welcome to The Movie Rental App";
+            label1.Click += label1_Click;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleDimensions = new SizeF(25F, 52F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = SystemColors.Info;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(1667, 780);
+            Controls.Add(label1);
             Controls.Add(loginButton);
             Controls.Add(password);
-            Controls.Add(passwordLabel);
             Controls.Add(username);
-            Controls.Add(usernameLabel);
+            Font = new Font("Berlin Sans FB", 20.1428585F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Margin = new Padding(6, 5, 6, 5);
             Name = "Form1";
             Text = "Login";
             Load += Form1_Load;
@@ -99,11 +100,9 @@
         }
 
         #endregion
-
-        private Label usernameLabel;
         private TextBox username;
         private TextBox password;
-        private Label passwordLabel;
         private Button loginButton;
+        private Label label1;
     }
 }

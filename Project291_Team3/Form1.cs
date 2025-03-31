@@ -7,10 +7,10 @@ namespace Project291_Team3
 {
     public partial class Form1 : Form
     {
-        public SqlConnection myConnection; 
+        public SqlConnection myConnection;
         public SqlCommand myCommand;
         public SqlDataReader myDataReader;
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -42,7 +42,55 @@ namespace Project291_Team3
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            username.Text = "Username";
+            username.ForeColor = Color.Gray;
+            password.Text = "Password";
+            password.ForeColor = Color.Gray;
+            password.UseSystemPasswordChar = false;
 
+            // Hook up placeholder events
+            username.Enter += username_Enter;
+            username.Leave += username_Leave;
+            password.Enter += password_Enter;
+            password.Leave += password_Leave;
+
+        }
+        private void username_Enter(object sender, EventArgs e)
+        {
+            if (username.Text == "Username")
+            {
+                username.Text = "";
+                username.ForeColor = Color.Black;
+            }
+        }
+
+        private void username_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(username.Text))
+            {
+                username.Text = "Username";
+                username.ForeColor = Color.Gray;
+            }
+        }
+
+        private void password_Enter(object sender, EventArgs e)
+        {
+            if (password.Text == "Password")
+            {
+                password.Text = "";
+                password.ForeColor = Color.Black;
+                password.UseSystemPasswordChar = true;
+            }
+        }
+
+        private void password_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(password.Text))
+            {
+                password.UseSystemPasswordChar = false;
+                password.Text = "Password";
+                password.ForeColor = Color.Gray;
+            }
         }
 
         private void usernameLabel_Click(object sender, EventArgs e)
@@ -52,6 +100,7 @@ namespace Project291_Team3
 
         private void username_TextChanged(object sender, EventArgs e)
         {
+
 
         }
 
@@ -74,10 +123,10 @@ namespace Project291_Team3
             if (ValidateLogin(usernameInput, passwordInput))
             {
                 // pass the connection to the next page instead of redoing it everytime for new page
-                Form2 form2 = new Form2(myConnection);
+                HomePage homepage = new HomePage(myConnection);
                 // when button is clicked show the next page and hide this page
                 // when making logic for login this code will move into where the creds are met 
-                form2.Show();
+                homepage.Show();
                 this.Hide();
 
 
@@ -105,7 +154,7 @@ namespace Project291_Team3
 
                 // Query to check if the first & last name exist in the Employee table
                 string query = "SELECT COUNT(*) FROM Employee WHERE FirstName = @FirstName AND LastName = @LastName";
-               
+
                 //create a SqlCommand object to execute the SQL query
                 // uses my connection insure the command is automatically closed after ecxecution
                 using (SqlCommand cmd = new SqlCommand(query, myConnection))
@@ -123,6 +172,11 @@ namespace Project291_Team3
                 MessageBox.Show("Error checking login: " + ex.Message);
                 return false;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

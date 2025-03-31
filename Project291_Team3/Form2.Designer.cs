@@ -29,21 +29,22 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             createNewCustomer = new Button();
             customerPhoneInput = new TextBox();
             bindingSource1 = new BindingSource(components);
             customerSearchButton = new Button();
             customerDataGridView = new DataGridView();
-            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customerDataGridView).BeginInit();
             SuspendLayout();
             // 
             // createNewCustomer
             // 
-            createNewCustomer.Location = new Point(251, 375);
+            createNewCustomer.Font = new Font("Berlin Sans FB", 14.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            createNewCustomer.Location = new Point(551, 569);
             createNewCustomer.Name = "createNewCustomer";
-            createNewCustomer.Size = new Size(320, 40);
+            createNewCustomer.Size = new Size(485, 40);
             createNewCustomer.TabIndex = 0;
             createNewCustomer.Text = "Create New Customer";
             createNewCustomer.UseVisualStyleBackColor = true;
@@ -51,17 +52,19 @@
             // 
             // customerPhoneInput
             // 
-            customerPhoneInput.Location = new Point(291, 49);
+            customerPhoneInput.Font = new Font("Berlin Sans FB", 14.1428576F);
+            customerPhoneInput.Location = new Point(389, 170);
             customerPhoneInput.Name = "customerPhoneInput";
-            customerPhoneInput.Size = new Size(314, 35);
+            customerPhoneInput.Size = new Size(667, 44);
             customerPhoneInput.TabIndex = 1;
             customerPhoneInput.TextChanged += customerPhoneInput_TextChanged;
             // 
             // customerSearchButton
             // 
-            customerSearchButton.Location = new Point(611, 47);
+            customerSearchButton.Font = new Font("Berlin Sans FB", 14.1428576F);
+            customerSearchButton.Location = new Point(1062, 170);
             customerSearchButton.Name = "customerSearchButton";
-            customerSearchButton.Size = new Size(131, 40);
+            customerSearchButton.Size = new Size(131, 44);
             customerSearchButton.TabIndex = 2;
             customerSearchButton.Text = "Search";
             customerSearchButton.UseVisualStyleBackColor = true;
@@ -69,29 +72,21 @@
             // 
             // customerDataGridView
             // 
+            customerDataGridView.BackgroundColor = Color.Tan;
             customerDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            customerDataGridView.Location = new Point(36, 90);
+            customerDataGridView.Location = new Point(389, 220);
             customerDataGridView.Name = "customerDataGridView";
             customerDataGridView.RowHeadersWidth = 72;
-            customerDataGridView.Size = new Size(706, 262);
+            customerDataGridView.Size = new Size(804, 330);
             customerDataGridView.TabIndex = 3;
             customerDataGridView.CellContentClick += customerDataGridView_CellDoubleClick;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(36, 54);
-            label1.Name = "label1";
-            label1.Size = new Size(249, 30);
-            label1.TabIndex = 4;
-            label1.Text = "Enter Customer Number: ";
             // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(label1);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(1667, 780);
             Controls.Add(customerDataGridView);
             Controls.Add(customerSearchButton);
             Controls.Add(customerPhoneInput);
@@ -112,6 +107,5 @@
         private BindingSource bindingSource1;
         private Button customerSearchButton;
         private DataGridView customerDataGridView;
-        private Label label1;
     }
 }

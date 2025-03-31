@@ -46,7 +46,7 @@ namespace Project291_Team3
             {
                 myConnection.Close();
             }
-            
+
             // SQL query
             string query = @"
                 SELECT c.FirstName, c.LastName, c.StreetAddress, c.City, c.StateOrProvince, 
@@ -66,7 +66,7 @@ namespace Project291_Team3
                 cmd.Parameters.AddWithValue("@CustomerID", customerID);
 
                 myConnection.Open();
-                SqlDataReader reader = cmd.ExecuteReader(); 
+                SqlDataReader reader = cmd.ExecuteReader();
 
                 // read data
                 if (reader.Read())
@@ -81,7 +81,7 @@ namespace Project291_Team3
                     zipLabel.Text = reader["ZipCode"].ToString();
                     emailLabel.Text = reader["Email"].ToString();
                     accountNumberLabel.Text = reader["AccountNumber"].ToString();
-                   
+
                     phoneNumberLabel.Text = reader["PhoneNumbers"].ToString();
                 }
                 else
@@ -102,6 +102,17 @@ namespace Project291_Team3
         private void label7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            EditCustomer editForm = new EditCustomer(myConnection, customerID);
+            var result = editForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                LoadCustomerDetails(); // Reload with updated info
+            }
         }
     }
 }

@@ -7,10 +7,19 @@
     <Compile Update="CustomerDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="EditCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="HomePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MovieMain.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

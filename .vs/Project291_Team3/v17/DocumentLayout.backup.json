@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|c:\\users\\rimic\\onedrive\\desktop\\project291_team3\\project291_team3\\editcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\editcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|c:\\users\\rimic\\onedrive\\desktop\\project291_team3\\project291_team3\\createcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\createcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|c:\\users\\rimic\\onedrive\\desktop\\project291_team3\\project291_team3\\editcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\editcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|c:\\users\\rimic\\onedrive\\desktop\\project291_team3\\project291_team3\\createcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -15,20 +23,28 @@
       "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\customerdetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|c:\\users\\rimic\\onedrive\\desktop\\project291_team3\\project291_team3\\customerdetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\project291_team3\\customerdetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\customerdetailsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|c:\\users\\rimic\\onedrive\\desktop\\project291_team3\\project291_team3\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|c:\\users\\rimic\\onedrive\\desktop\\project291_team3\\project291_team3\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|c:\\users\\rimic\\onedrive\\desktop\\project291_team3\\project291_team3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\project291_team3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|c:\\users\\rimic\\onedrive\\desktop\\project291_team3\\project291_team3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|c:\\users\\rimic\\onedrive\\desktop\\project291_team3\\project291_team3\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|c:\\users\\rimic\\onedrive\\desktop\\project291_team3\\project291_team3\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10E841D4-BCE4-4071-B1EA-CE77DB34080C}|Project291_Team3\\Project291_Team3.csproj|solutionrelative:project291_team3\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,49 +54,128 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "CreateCustomer.cs",
               "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\CreateCustomer.cs",
               "RelativeDocumentMoniker": "Project291_Team3\\CreateCustomer.cs",
               "ToolTip": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\CreateCustomer.cs",
               "RelativeToolTip": "Project291_Team3\\CreateCustomer.cs",
-              "ViewState": "AgIAANsAAAAAAAAAAAAUwKEAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAqwKEAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T07:22:48.723Z",
+              "WhenOpened": "2025-03-31T06:27:19.168Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "EditCustomer.cs",
+              "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\EditCustomer.cs",
+              "RelativeDocumentMoniker": "Project291_Team3\\EditCustomer.cs",
+              "ToolTip": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\EditCustomer.cs",
+              "RelativeToolTip": "Project291_Team3\\EditCustomer.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAiwJIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T06:24:48.509Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EditCustomer.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\EditCustomer.cs",
+              "RelativeDocumentMoniker": "Project291_Team3\\EditCustomer.cs",
+              "ToolTip": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\EditCustomer.cs [Design]",
+              "RelativeToolTip": "Project291_Team3\\EditCustomer.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T05:49:14.065Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "CreateCustomer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\CreateCustomer.cs",
               "RelativeDocumentMoniker": "Project291_Team3\\CreateCustomer.cs",
               "ToolTip": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\CreateCustomer.cs [Design]",
               "RelativeToolTip": "Project291_Team3\\CreateCustomer.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T07:22:46.122Z",
+              "WhenOpened": "2025-03-31T04:09:01.193Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
+              "Title": "Form2.cs",
+              "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\Form2.cs",
+              "RelativeDocumentMoniker": "Project291_Team3\\Form2.cs",
+              "ToolTip": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\Form2.cs",
+              "RelativeToolTip": "Project291_Team3\\Form2.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAswHMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T03:40:08.523Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Form2.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\Form2.cs",
+              "RelativeDocumentMoniker": "Project291_Team3\\Form2.cs",
+              "ToolTip": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\Form2.cs [Design]",
+              "RelativeToolTip": "Project291_Team3\\Form2.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T03:37:00.238Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "HomePage.cs",
+              "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\HomePage.cs",
+              "RelativeDocumentMoniker": "Project291_Team3\\HomePage.cs",
+              "ToolTip": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\HomePage.cs",
+              "RelativeToolTip": "Project291_Team3\\HomePage.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAhwCMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T03:33:33.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HomePage.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\HomePage.cs",
+              "RelativeDocumentMoniker": "Project291_Team3\\HomePage.cs",
+              "ToolTip": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\HomePage.cs [Design]",
+              "RelativeToolTip": "Project291_Team3\\HomePage.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T03:27:23.984Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "CustomerDetailsForm.cs",
               "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\CustomerDetailsForm.cs",
               "RelativeDocumentMoniker": "Project291_Team3\\CustomerDetailsForm.cs",
               "ToolTip": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\CustomerDetailsForm.cs",
               "RelativeToolTip": "Project291_Team3\\CustomerDetailsForm.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAQwFoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADsAAAAAAAAAAAAqwG8AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-18T06:48:31.344Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "CustomerDetailsForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\CustomerDetailsForm.cs",
               "RelativeDocumentMoniker": "Project291_Team3\\CustomerDetailsForm.cs",
@@ -92,20 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\Form1.cs",
-              "RelativeDocumentMoniker": "Project291_Team3\\Form1.cs",
-              "ToolTip": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\Form1.cs",
-              "RelativeToolTip": "Project291_Team3\\Form1.cs",
-              "ViewState": "AgIAAFkAAAAAAAAAAAAswGwAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T06:44:51.399Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\Form1.cs",
               "RelativeDocumentMoniker": "Project291_Team3\\Form1.cs",
@@ -114,19 +196,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-18T06:44:49.977Z",
               "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Form2.cs",
-              "DocumentMoniker": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\Form2.cs",
-              "RelativeDocumentMoniker": "Project291_Team3\\Form2.cs",
-              "ToolTip": "C:\\Users\\rimic\\OneDrive\\Desktop\\Project291_Team3\\Project291_Team3\\Form2.cs",
-              "RelativeToolTip": "Project291_Team3\\Form2.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAowEAAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T23:41:29.36Z",
-              "EditorCaption": ""
             }
           ]
         }
