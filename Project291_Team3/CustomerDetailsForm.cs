@@ -21,6 +21,9 @@ namespace Project291_Team3
             myConnection = connection;
             this.customerID = customerID;
             LoadCustomerDetails();
+            tabPage1.Text = "Customer Info";
+            tabPage2.Text = "Order History";
+            LoadOrderHistory();
         }
 
         private void CustomerDetailsForm_Load(object sender, EventArgs e)
@@ -114,5 +117,52 @@ namespace Project291_Team3
                 LoadCustomerDetails(); // Reload with updated info
             }
         }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        private void LoadOrderHistory()
+        {
+            string query = @"
+                    SELECT 
+                        R.OrderID AS [Order Number],
+                        M.MovieName AS [Movie Name],
+                        E.FirstName + ' ' + E.LastName AS [Employee Name],
+                        R.CheckoutDateTime AS [Checkout Date],
+                        R.ReturnDateTime AS [Return Date]
+                    FROM RentalOrder R
+                    JOIN Movie M ON R.MovieID = M.MovieID
+                    JOIN Employee E ON R.EmployeeID = E.EmployeeID
+                    WHERE R.CustomerID = @CustomerID";
+
+            using (SqlCommand cmd = new SqlCommand(query, myConnection))
+            {
+                cmd.Parameters.AddWithValue("@CustomerID", customerID);
+
+                if (myConnection.State == ConnectionState.Open)
+                    myConnection.Close();
+
+                myConnection.Open();
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+
+                myConnection.Close();
+
+                dataGridView1.DataSource = dataTable;
+                dataGridView1.ReadOnly = true;
+                dataGridView1.AllowUserToAddRows = false;
+                dataGridView1.AllowUserToDeleteRows = false;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+        }
+
     }
 }
