@@ -42,8 +42,9 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
-            label1 = new Label();
+            newOrder = new Button();
             dataGridView1 = new DataGridView();
+            label1 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -54,7 +55,7 @@
             // 
             phoneNumberLabel.AutoSize = true;
             phoneNumberLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            phoneNumberLabel.Location = new Point(490, 418);
+            phoneNumberLabel.Location = new Point(485, 440);
             phoneNumberLabel.Name = "phoneNumberLabel";
             phoneNumberLabel.Size = new Size(227, 37);
             phoneNumberLabel.TabIndex = 29;
@@ -64,7 +65,7 @@
             // 
             cityLabel.AutoSize = true;
             cityLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            cityLabel.Location = new Point(962, 249);
+            cityLabel.Location = new Point(1094, 258);
             cityLabel.Name = "cityLabel";
             cityLabel.Size = new Size(71, 37);
             cityLabel.TabIndex = 28;
@@ -74,7 +75,7 @@
             // 
             emailLabel.AutoSize = true;
             emailLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            emailLabel.Location = new Point(817, 336);
+            emailLabel.Location = new Point(1094, 345);
             emailLabel.Name = "emailLabel";
             emailLabel.Size = new Size(94, 37);
             emailLabel.TabIndex = 27;
@@ -84,7 +85,7 @@
             // 
             zipLabel.AutoSize = true;
             zipLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            zipLabel.Location = new Point(817, 249);
+            zipLabel.Location = new Point(848, 258);
             zipLabel.Name = "zipLabel";
             zipLabel.Size = new Size(63, 37);
             zipLabel.TabIndex = 25;
@@ -94,7 +95,7 @@
             // 
             countryLabel.AutoSize = true;
             countryLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            countryLabel.Location = new Point(492, 336);
+            countryLabel.Location = new Point(485, 345);
             countryLabel.Name = "countryLabel";
             countryLabel.Size = new Size(127, 37);
             countryLabel.TabIndex = 24;
@@ -104,7 +105,7 @@
             // 
             stateLabel.AutoSize = true;
             stateLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            stateLabel.Location = new Point(659, 336);
+            stateLabel.Location = new Point(848, 345);
             stateLabel.Name = "stateLabel";
             stateLabel.Size = new Size(88, 37);
             stateLabel.TabIndex = 23;
@@ -114,7 +115,7 @@
             // 
             streetLabel.AutoSize = true;
             streetLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            streetLabel.Location = new Point(492, 249);
+            streetLabel.Location = new Point(485, 258);
             streetLabel.Name = "streetLabel";
             streetLabel.Size = new Size(97, 37);
             streetLabel.TabIndex = 22;
@@ -123,20 +124,20 @@
             // lastNameLabel
             // 
             lastNameLabel.AutoSize = true;
-            lastNameLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            lastNameLabel.Location = new Point(837, 173);
+            lastNameLabel.Font = new Font("Berlin Sans FB Demi", 14.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lastNameLabel.Location = new Point(485, 173);
             lastNameLabel.Name = "lastNameLabel";
-            lastNameLabel.Size = new Size(166, 37);
+            lastNameLabel.Size = new Size(176, 38);
             lastNameLabel.TabIndex = 21;
             lastNameLabel.Text = "Last Name";
             // 
             // firstNameLabel
             // 
             firstNameLabel.AutoSize = true;
-            firstNameLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            firstNameLabel.Location = new Point(485, 173);
+            firstNameLabel.Font = new Font("Berlin Sans FB Demi", 14.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            firstNameLabel.Location = new Point(485, 109);
             firstNameLabel.Name = "firstNameLabel";
-            firstNameLabel.Size = new Size(167, 37);
+            firstNameLabel.Size = new Size(180, 38);
             firstNameLabel.TabIndex = 20;
             firstNameLabel.Text = "First Name";
             // 
@@ -144,7 +145,7 @@
             // 
             accountNumberLabel.AutoSize = true;
             accountNumberLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            accountNumberLabel.Location = new Point(983, 114);
+            accountNumberLabel.Location = new Point(1218, 57);
             accountNumberLabel.Name = "accountNumberLabel";
             accountNumberLabel.Size = new Size(250, 37);
             accountNumberLabel.TabIndex = 30;
@@ -173,6 +174,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.BackColor = Color.NavajoWhite;
             tabPage1.Controls.Add(accountNumberLabel);
             tabPage1.Controls.Add(editButton);
             tabPage1.Controls.Add(firstNameLabel);
@@ -190,11 +192,12 @@
             tabPage1.Size = new Size(1671, 739);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
-            tabPage1.UseVisualStyleBackColor = true;
             tabPage1.Click += tabPage1_Click;
             // 
             // tabPage2
             // 
+            tabPage2.BackColor = Color.NavajoWhite;
+            tabPage2.Controls.Add(newOrder);
             tabPage2.Controls.Add(dataGridView1);
             tabPage2.Controls.Add(label1);
             tabPage2.Location = new Point(4, 39);
@@ -203,17 +206,18 @@
             tabPage2.Size = new Size(1671, 739);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
+            tabPage2.Click += tabPage2_Click;
             // 
-            // label1
+            // newOrder
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Berlin Sans FB", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(325, 112);
-            label1.Name = "label1";
-            label1.Size = new Size(253, 46);
-            label1.TabIndex = 0;
-            label1.Text = "Order History";
+            newOrder.Font = new Font("Berlin Sans FB", 14.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            newOrder.Location = new Point(518, 517);
+            newOrder.Name = "newOrder";
+            newOrder.Size = new Size(480, 66);
+            newOrder.TabIndex = 2;
+            newOrder.Text = "Place Order";
+            newOrder.UseVisualStyleBackColor = true;
+            newOrder.Click += newOrder_Click;
             // 
             // dataGridView1
             // 
@@ -224,6 +228,16 @@
             dataGridView1.Size = new Size(796, 314);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Berlin Sans FB", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(325, 112);
+            label1.Name = "label1";
+            label1.Size = new Size(253, 46);
+            label1.TabIndex = 0;
+            label1.Text = "Order History";
             // 
             // CustomerDetailsForm
             // 
@@ -262,5 +276,6 @@
         private TabPage tabPage2;
         private Label label1;
         private DataGridView dataGridView1;
+        private Button newOrder;
     }
 }

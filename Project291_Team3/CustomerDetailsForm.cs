@@ -15,11 +15,13 @@ namespace Project291_Team3
     {
         private SqlConnection myConnection;
         private int customerID;
-        public CustomerDetailsForm(SqlConnection connection, int customerID)
+        private int employeeID;
+        public CustomerDetailsForm(SqlConnection connection, int customerID, int employeeID)
         {
             InitializeComponent();
             myConnection = connection;
             this.customerID = customerID;
+            this.employeeID = employeeID;
             LoadCustomerDetails();
             tabPage1.Text = "Customer Info";
             tabPage2.Text = "Order History";
@@ -164,5 +166,15 @@ namespace Project291_Team3
             }
         }
 
+        private void newOrder_Click(object sender, EventArgs e)
+        {
+            OrderForm form = new OrderForm(myConnection, customerID, employeeID);
+            form.ShowDialog();
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

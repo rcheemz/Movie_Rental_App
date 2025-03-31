@@ -11,39 +11,41 @@ using System.Windows.Forms;
 
 namespace Project291_Team3
 {
-    public partial class MovieMain : Form
+    public partial class OrderForm : Form
     {
         private SqlConnection myConnection;
+        private int customerID;
         private int employeeID;
-        public MovieMain(SqlConnection connection, int employeeID)
+        public OrderForm(SqlConnection connection, int customerID, int employeeID)
         {
-
             InitializeComponent();
             myConnection = connection;
+            this.customerID = customerID;
             this.employeeID = employeeID;
         }
 
-        private void MovieMain_Load(object sender, EventArgs e)
+        private void OrderForm_Load(object sender, EventArgs e)
         {
-            // Set up Datagirdview properties
-            movieDataGridView.ReadOnly = true;
-            movieDataGridView.AllowUserToAddRows = false;
-            movieDataGridView.AllowUserToDeleteRows = false;
-            movieDataGridView.MultiSelect = false;
-            movieDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            movieDataGridView.RowHeadersVisible = false;
-            movieDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            movieDataGridView.ColumnHeadersVisible = false;
+            orderDataGridView.ReadOnly = true;
+            orderDataGridView.AllowUserToAddRows = false;
+            orderDataGridView.AllowUserToDeleteRows = false;
+            orderDataGridView.MultiSelect = false;
+            orderDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            orderDataGridView.RowHeadersVisible = false;
+            orderDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            orderDataGridView.ColumnHeadersVisible = false;
 
         }
-        private void movieDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void orderDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                int movieID = Convert.ToInt32(movieDataGridView.Rows[e.RowIndex].Cells["MovieID"].Value);
+                int movieID = Convert.ToInt32(orderDataGridView.Rows[e.RowIndex].Cells["MovieID"].Value);
 
-
-                MessageBox.Show("Selected Movie ID: " + movieID);
+                // ⚠️ Later here you will open an "Order Details" screen to actually place the order
+                OrderPlacementForm orderPlacementForm = new OrderPlacementForm(myConnection, customerID, employeeID, movieID);
+                orderPlacementForm.ShowDialog();
             }
         }
 
@@ -76,15 +78,8 @@ namespace Project291_Team3
                     return;
                 }
 
-                movieDataGridView.DataSource = dt;
+                orderDataGridView.DataSource = dt;
             }
-        }
-
-        private void back_Click(object sender, EventArgs e)
-        {
-            HomePage homePage = new HomePage(myConnection, employeeID);
-            homePage.Show();
-            this.Hide();
         }
     }
 }

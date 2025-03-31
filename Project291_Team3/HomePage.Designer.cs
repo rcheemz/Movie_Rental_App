@@ -57,6 +57,7 @@
             movieButton.TabIndex = 1;
             movieButton.Text = "Manage Movies";
             movieButton.UseVisualStyleBackColor = true;
+            movieButton.Click += movieButton_Click;
             // 
             // orderButton
             // 

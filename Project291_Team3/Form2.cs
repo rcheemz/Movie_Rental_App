@@ -16,14 +16,16 @@ namespace Project291_Team3
     public partial class Form2 : Form
     {
         private SqlConnection myConnection;
+        private int employeeID;
 
-        public Form2(SqlConnection connection)
+        public Form2(SqlConnection connection, int employeeID)
         {
 
             InitializeComponent();
 
             // get the connection form form1 (previous page)
             myConnection = connection;
+            this.employeeID = employeeID;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -110,10 +112,17 @@ namespace Project291_Team3
 
                 // Open full customer details form
                 // pass connection again
-                CustomerDetailsForm customerDetailsForm = new CustomerDetailsForm(myConnection, customerID);
+                CustomerDetailsForm customerDetailsForm = new CustomerDetailsForm(myConnection, customerID, employeeID);
                 customerDetailsForm.ShowDialog();
             }
 
+        }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            HomePage homePage = new HomePage(myConnection, employeeID);
+            homePage.Show();
+            this.Hide();
         }
     }
 }

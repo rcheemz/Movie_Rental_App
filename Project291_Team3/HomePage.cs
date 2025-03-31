@@ -15,16 +15,18 @@ namespace Project291_Team3
     public partial class HomePage : Form
     {
         private SqlConnection myConnection;
-        public HomePage(SqlConnection connection)
+        private int employeeID;
+        public HomePage(SqlConnection connection, int employeeID)
         {
             InitializeComponent();
             myConnection = connection;
+            this.employeeID = employeeID;
         }
 
         private void customerButton_Click(object sender, EventArgs e)
         {
             // pass the connection to the next page instead of redoing it everytime for new page
-            Form2 form2 = new Form2(myConnection);
+            Form2 form2 = new Form2(myConnection, employeeID);
             // when button is clicked show the next page and hide this page
             // when making logic for login this code will move into where the creds are met 
             form2.Show();
@@ -34,6 +36,13 @@ namespace Project291_Team3
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void movieButton_Click(object sender, EventArgs e)
+        {
+            MovieMain movieMain = new MovieMain(myConnection, employeeID);
+            movieMain.Show();
+            this.Hide();
         }
     }
 }

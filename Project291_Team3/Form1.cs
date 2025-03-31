@@ -119,17 +119,13 @@ namespace Project291_Team3
             string usernameInput = username.Text; // rn were just gunna firstname and lastname for the login
             string passwordInput = password.Text; // we want to replace this with hashed password ask dr. pang for help
 
+            int employeeID = GetEmployeeID(usernameInput, passwordInput);
 
-            if (ValidateLogin(usernameInput, passwordInput))
+            if (employeeID != -1)
             {
-                // pass the connection to the next page instead of redoing it everytime for new page
-                HomePage homepage = new HomePage(myConnection);
-                // when button is clicked show the next page and hide this page
-                // when making logic for login this code will move into where the creds are met 
+                HomePage homepage = new HomePage(myConnection, employeeID);
                 homepage.Show();
                 this.Hide();
-
-
             }
             else
             {
@@ -171,6 +167,35 @@ namespace Project291_Team3
             {
                 MessageBox.Show("Error checking login: " + ex.Message);
                 return false;
+            }
+        }
+
+        private int GetEmployeeID(string username, string password)
+        {
+            try
+            {
+                string query = "SELECT EmployeeID FROM Employee WHERE FirstName = @FirstName AND LastName = @LastName";
+
+                using (SqlCommand cmd = new SqlCommand(query, myConnection))
+                {
+                    cmd.Parameters.AddWithValue("@FirstName", username);
+                    cmd.Parameters.AddWithValue("@LastName", password);
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error checking login: " + ex.Message);
+                return -1;
             }
         }
 

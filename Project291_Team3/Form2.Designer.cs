@@ -35,6 +35,8 @@
             bindingSource1 = new BindingSource(components);
             customerSearchButton = new Button();
             customerDataGridView = new DataGridView();
+            back = new Button();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customerDataGridView).BeginInit();
             SuspendLayout();
@@ -42,7 +44,7 @@
             // createNewCustomer
             // 
             createNewCustomer.Font = new Font("Berlin Sans FB", 14.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            createNewCustomer.Location = new Point(551, 569);
+            createNewCustomer.Location = new Point(580, 612);
             createNewCustomer.Name = "createNewCustomer";
             createNewCustomer.Size = new Size(485, 40);
             createNewCustomer.TabIndex = 0;
@@ -53,7 +55,7 @@
             // customerPhoneInput
             // 
             customerPhoneInput.Font = new Font("Berlin Sans FB", 14.1428576F);
-            customerPhoneInput.Location = new Point(389, 170);
+            customerPhoneInput.Location = new Point(418, 213);
             customerPhoneInput.Name = "customerPhoneInput";
             customerPhoneInput.Size = new Size(667, 44);
             customerPhoneInput.TabIndex = 1;
@@ -62,7 +64,7 @@
             // customerSearchButton
             // 
             customerSearchButton.Font = new Font("Berlin Sans FB", 14.1428576F);
-            customerSearchButton.Location = new Point(1062, 170);
+            customerSearchButton.Location = new Point(1091, 213);
             customerSearchButton.Name = "customerSearchButton";
             customerSearchButton.Size = new Size(131, 44);
             customerSearchButton.TabIndex = 2;
@@ -74,12 +76,34 @@
             // 
             customerDataGridView.BackgroundColor = Color.Tan;
             customerDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            customerDataGridView.Location = new Point(389, 220);
+            customerDataGridView.Location = new Point(418, 263);
             customerDataGridView.Name = "customerDataGridView";
             customerDataGridView.RowHeadersWidth = 72;
             customerDataGridView.Size = new Size(804, 330);
             customerDataGridView.TabIndex = 3;
             customerDataGridView.CellContentClick += customerDataGridView_CellDoubleClick;
+            // 
+            // back
+            // 
+            back.Font = new Font("Berlin Sans FB", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            back.Location = new Point(168, 61);
+            back.Name = "back";
+            back.Size = new Size(131, 40);
+            back.TabIndex = 4;
+            back.Text = "BACK";
+            back.UseVisualStyleBackColor = true;
+            back.Click += back_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Tan;
+            label1.Font = new Font("Berlin Sans FB", 27.8571434F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(584, 95);
+            label1.Name = "label1";
+            label1.Size = new Size(481, 72);
+            label1.TabIndex = 14;
+            label1.Text = "Customer Search";
             // 
             // Form2
             // 
@@ -87,6 +111,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1667, 780);
+            Controls.Add(label1);
+            Controls.Add(back);
             Controls.Add(customerDataGridView);
             Controls.Add(customerSearchButton);
             Controls.Add(customerPhoneInput);
@@ -107,5 +133,7 @@
         private BindingSource bindingSource1;
         private Button customerSearchButton;
         private DataGridView customerDataGridView;
+        private Button back;
+        private Label label1;
     }
 }
