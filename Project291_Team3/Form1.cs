@@ -117,9 +117,11 @@ namespace Project291_Team3
         private void loginButton_Click(object sender, EventArgs e)
         {
             string usernameInput = username.Text; // rn were just gunna firstname and lastname for the login
-            string passwordInput = password.Text; // we want to replace this with hashed password ask dr. pang for help
 
-            int employeeID = GetEmployeeID(usernameInput, passwordInput);
+            string passwordInput = password.Text; // we want to replace this with hashed password ask dr. pang for help
+            string hashedPassword = ComputeSHA256Hash(passwordInput);
+
+            int employeeID = GetEmployeeID(usernameInput, hashedPassword);
 
             if (employeeID != -1)
             {
@@ -140,46 +142,18 @@ namespace Project291_Team3
          * @parameters username, password
          * @return bool
          */
-        private bool ValidateLogin(string username, string password)
-        {
-            try
-            {
-                // debug ingore
-                //MessageBox.Show($"Entered FirstName: '{username}'\nEntered LastName: '{password}'", "Debug");
-
-
-                // Query to check if the first & last name exist in the Employee table
-                string query = "SELECT COUNT(*) FROM Employee WHERE FirstName = @FirstName AND LastName = @LastName";
-
-                //create a SqlCommand object to execute the SQL query
-                // uses my connection insure the command is automatically closed after ecxecution
-                using (SqlCommand cmd = new SqlCommand(query, myConnection))
-                {
-                    cmd.Parameters.AddWithValue("@FirstName", username); //place holders for the SQL query replace with username and password
-                    cmd.Parameters.AddWithValue("@LastName", password); // prevents SQL injection
-
-                    int count = (int)cmd.ExecuteScalar(); // executes query SELEC COUNT(*)
-                    return count > 0; // Returns true if an employee with matching names exists 
-                    // We will need to replace this logic with the password it will be similar
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error checking login: " + ex.Message);
-                return false;
-            }
-        }
+       
 
         private int GetEmployeeID(string username, string password)
         {
             try
             {
-                string query = "SELECT EmployeeID FROM Employee WHERE FirstName = @FirstName AND LastName = @LastName";
+                string query = "SELECT EmployeeID FROM Employee WHERE Username = @Username AND PasswordHash = @PasswordHash";
 
                 using (SqlCommand cmd = new SqlCommand(query, myConnection))
                 {
-                    cmd.Parameters.AddWithValue("@FirstName", username);
-                    cmd.Parameters.AddWithValue("@LastName", password);
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@PasswordHash", password);
 
                     object result = cmd.ExecuteScalar();
                     if (result != null)
@@ -198,6 +172,23 @@ namespace Project291_Team3
                 return -1;
             }
         }
+        public static string ComputeSHA256Hash(string rawData)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // Convert the input string to a byte array and compute the hash
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a hex string
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in bytes)
+                {
+                    builder.Append(b.ToString("x2")); // "x2" = lower-case hex
+                }
+                return builder.ToString();
+            }
+        }
+
 
         private void label1_Click(object sender, EventArgs e)
         {
