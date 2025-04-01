@@ -47,7 +47,7 @@
             movieDataGridView.RowHeadersWidth = 72;
             movieDataGridView.Size = new Size(804, 330);
             movieDataGridView.TabIndex = 7;
-            movieDataGridView.CellContentClick += movieDataGridView_CellContentClick;
+            movieDataGridView.CellContentClick += movieDataGridView_CellDoubleClick;
             // 
             // movieSearchButton
             // 
@@ -77,6 +77,7 @@
             addNewMovie.TabIndex = 4;
             addNewMovie.Text = "Add New Movie";
             addNewMovie.UseVisualStyleBackColor = true;
+            addNewMovie.Click += addNewMovie_Click;
             // 
             // back
             // 
@@ -115,6 +116,7 @@
             Controls.Add(addNewMovie);
             Name = "MovieMain";
             Text = "MovieMain";
+            Load += MovieMain_Load_1;
             ((System.ComponentModel.ISupportInitialize)movieDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

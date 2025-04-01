@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomePage));
             customerButton = new Button();
             movieButton = new Button();
-            orderButton = new Button();
             reportsButton = new Button();
             logoutButton = new Button();
             label1 = new Label();
@@ -40,7 +39,7 @@
             // customerButton
             // 
             customerButton.Font = new Font("Berlin Sans FB", 20.1428585F);
-            customerButton.Location = new Point(505, 168);
+            customerButton.Location = new Point(495, 202);
             customerButton.Name = "customerButton";
             customerButton.Size = new Size(688, 106);
             customerButton.TabIndex = 0;
@@ -51,7 +50,7 @@
             // movieButton
             // 
             movieButton.Font = new Font("Berlin Sans FB", 20.1428585F);
-            movieButton.Location = new Point(505, 282);
+            movieButton.Location = new Point(495, 345);
             movieButton.Name = "movieButton";
             movieButton.Size = new Size(688, 106);
             movieButton.TabIndex = 1;
@@ -59,25 +58,16 @@
             movieButton.UseVisualStyleBackColor = true;
             movieButton.Click += movieButton_Click;
             // 
-            // orderButton
-            // 
-            orderButton.Font = new Font("Berlin Sans FB", 20.1428585F);
-            orderButton.Location = new Point(505, 394);
-            orderButton.Name = "orderButton";
-            orderButton.Size = new Size(688, 106);
-            orderButton.TabIndex = 2;
-            orderButton.Text = "Rentals";
-            orderButton.UseVisualStyleBackColor = true;
-            // 
             // reportsButton
             // 
             reportsButton.Font = new Font("Berlin Sans FB", 20.1428585F);
-            reportsButton.Location = new Point(505, 506);
+            reportsButton.Location = new Point(495, 482);
             reportsButton.Name = "reportsButton";
             reportsButton.Size = new Size(688, 106);
             reportsButton.TabIndex = 3;
             reportsButton.Text = "View Reports";
             reportsButton.UseVisualStyleBackColor = true;
+            reportsButton.Click += reportsButton_Click;
             // 
             // logoutButton
             // 
@@ -90,6 +80,7 @@
             logoutButton.TabIndex = 4;
             logoutButton.Text = "Logout";
             logoutButton.UseVisualStyleBackColor = false;
+            logoutButton.Click += logoutButton_Click;
             // 
             // label1
             // 
@@ -113,7 +104,6 @@
             Controls.Add(label1);
             Controls.Add(logoutButton);
             Controls.Add(reportsButton);
-            Controls.Add(orderButton);
             Controls.Add(movieButton);
             Controls.Add(customerButton);
             Name = "HomePage";
@@ -126,7 +116,6 @@
 
         private Button customerButton;
         private Button movieButton;
-        private Button orderButton;
         private Button reportsButton;
         private Button logoutButton;
         private Label label1;

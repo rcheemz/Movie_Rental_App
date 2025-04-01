@@ -29,7 +29,7 @@ namespace Project291_Team3
                 myCommand.Connection = myConnection; // Link the connection
 
                 // we can get rid of this but this is to show that we connected successfully to the database
-                MessageBox.Show("Connected Successfully");
+                //MessageBox.Show("Connected Successfully");
             }
             catch (Exception e)
             {

@@ -32,3 +32,6 @@ C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8
 C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8.0-windows\Project291_Team3.EditCustomer.resources
 C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8.0-windows\Project291_Team3.OrderForm.resources
 C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8.0-windows\Project291_Team3.orderPlacementForm.resources
+C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8.0-windows\Project291_Team3.MovieDetailsForm.resources
+C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8.0-windows\Project291_Team3.CreateMovieForm.resources
+C:\Users\rimic\OneDrive\Desktop\Project291_Team3\Project291_Team3\obj\Debug\net8.0-windows\Project291_Team3.ReportsForm.resources

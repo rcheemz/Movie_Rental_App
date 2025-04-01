@@ -36,14 +36,15 @@ namespace Project291_Team3
             movieDataGridView.ColumnHeadersVisible = false;
 
         }
-        private void movieDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void movieDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 int movieID = Convert.ToInt32(movieDataGridView.Rows[e.RowIndex].Cells["MovieID"].Value);
 
 
-                MessageBox.Show("Selected Movie ID: " + movieID);
+                MovieDetailsForm movieDetailsForm = new MovieDetailsForm(myConnection, movieID);
+                movieDetailsForm.ShowDialog();
             }
         }
 
@@ -85,6 +86,17 @@ namespace Project291_Team3
             HomePage homePage = new HomePage(myConnection, employeeID);
             homePage.Show();
             this.Hide();
+        }
+
+        private void MovieMain_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addNewMovie_Click(object sender, EventArgs e)
+        {
+            CreateMovieForm createMovieForm = new CreateMovieForm(myConnection);
+            createMovieForm.ShowDialog();
         }
     }
 }

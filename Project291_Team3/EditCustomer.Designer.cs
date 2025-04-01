@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
             comboBox2 = new ComboBox();
-            label11 = new Label();
             comboBox1 = new ComboBox();
             saveButton = new Button();
             creditInput = new TextBox();
@@ -42,7 +40,6 @@
             streetInput = new TextBox();
             lastNameInput = new TextBox();
             firstNameInput = new TextBox();
-            label10 = new Label();
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
@@ -52,36 +49,19 @@
             label4 = new Label();
             label2 = new Label();
             label1 = new Label();
+            addPhoneButton = new Button();
+            label12 = new Label();
+            phoneListPanel = new FlowLayoutPanel();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Font = new Font("Berlin Sans FB", 9.857143F);
-            button1.Location = new Point(981, 411);
-            button1.Name = "button1";
-            button1.Size = new Size(36, 40);
-            button1.TabIndex = 48;
-            button1.Text = "+";
-            button1.UseVisualStyleBackColor = true;
             // 
             // comboBox2
             // 
             comboBox2.Font = new Font("Berlin Sans FB", 9.857143F);
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(850, 413);
+            comboBox2.Location = new Point(861, 442);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(109, 34);
             comboBox2.TabIndex = 47;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Berlin Sans FB", 9.857143F);
-            label11.Location = new Point(850, 454);
-            label11.Name = "label11";
-            label11.Size = new Size(61, 26);
-            label11.TabIndex = 46;
-            label11.Text = "Type";
             // 
             // comboBox1
             // 
@@ -95,7 +75,7 @@
             // saveButton
             // 
             saveButton.Font = new Font("Berlin Sans FB", 9.857143F);
-            saveButton.Location = new Point(744, 595);
+            saveButton.Location = new Point(749, 672);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(131, 40);
             saveButton.TabIndex = 44;
@@ -106,7 +86,7 @@
             // creditInput
             // 
             creditInput.Font = new Font("Berlin Sans FB", 9.857143F);
-            creditInput.Location = new Point(511, 498);
+            creditInput.Location = new Point(511, 418);
             creditInput.Name = "creditInput";
             creditInput.Size = new Size(321, 33);
             creditInput.TabIndex = 43;
@@ -114,9 +94,9 @@
             // phoneInput
             // 
             phoneInput.Font = new Font("Berlin Sans FB", 9.857143F);
-            phoneInput.Location = new Point(509, 416);
+            phoneInput.Location = new Point(976, 443);
             phoneInput.Name = "phoneInput";
-            phoneInput.Size = new Size(321, 33);
+            phoneInput.Size = new Size(230, 33);
             phoneInput.TabIndex = 42;
             // 
             // emailInput
@@ -175,16 +155,6 @@
             firstNameInput.Size = new Size(294, 33);
             firstNameInput.TabIndex = 35;
             // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Berlin Sans FB", 9.857143F);
-            label10.Location = new Point(509, 454);
-            label10.Name = "label10";
-            label10.Size = new Size(171, 26);
-            label10.TabIndex = 34;
-            label10.Text = "Phone Number ";
-            // 
             // label9
             // 
             label9.AutoSize = true;
@@ -209,7 +179,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Berlin Sans FB", 9.857143F);
-            label7.Location = new Point(511, 536);
+            label7.Location = new Point(511, 456);
             label7.Name = "label7";
             label7.Size = new Size(215, 26);
             label7.TabIndex = 31;
@@ -275,15 +245,43 @@
             label1.TabIndex = 25;
             label1.Text = "First Name";
             // 
+            // addPhoneButton
+            // 
+            addPhoneButton.Location = new Point(1223, 442);
+            addPhoneButton.Name = "addPhoneButton";
+            addPhoneButton.Size = new Size(131, 40);
+            addPhoneButton.TabIndex = 53;
+            addPhoneButton.Text = "Add";
+            addPhoneButton.UseVisualStyleBackColor = true;
+            addPhoneButton.Click += addPhoneButton_Click_1;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Berlin Sans FB", 9.857143F);
+            label12.Location = new Point(861, 413);
+            label12.Name = "label12";
+            label12.Size = new Size(171, 26);
+            label12.TabIndex = 49;
+            label12.Text = "Phone Number ";
+            // 
+            // phoneListPanel
+            // 
+            phoneListPanel.Location = new Point(861, 482);
+            phoneListPanel.Name = "phoneListPanel";
+            phoneListPanel.Size = new Size(350, 175);
+            phoneListPanel.TabIndex = 54;
+            // 
             // EditCustomer
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.NavajoWhite;
             ClientSize = new Size(1667, 780);
-            Controls.Add(button1);
+            Controls.Add(phoneListPanel);
+            Controls.Add(addPhoneButton);
+            Controls.Add(label12);
             Controls.Add(comboBox2);
-            Controls.Add(label11);
             Controls.Add(comboBox1);
             Controls.Add(saveButton);
             Controls.Add(creditInput);
@@ -295,7 +293,6 @@
             Controls.Add(streetInput);
             Controls.Add(lastNameInput);
             Controls.Add(firstNameInput);
-            Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(label7);
@@ -313,10 +310,7 @@
         }
 
         #endregion
-
-        private Button button1;
         private ComboBox comboBox2;
-        private Label label11;
         private ComboBox comboBox1;
         private Button saveButton;
         private TextBox creditInput;
@@ -328,7 +322,6 @@
         private TextBox streetInput;
         private TextBox lastNameInput;
         private TextBox firstNameInput;
-        private Label label10;
         private Label label9;
         private Label label8;
         private Label label7;
@@ -338,5 +331,8 @@
         private Label label4;
         private Label label2;
         private Label label1;
+        private Button addPhoneButton;
+        private Label label12;
+        private FlowLayoutPanel phoneListPanel;
     }
 }

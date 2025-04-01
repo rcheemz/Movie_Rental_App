@@ -44,5 +44,18 @@ namespace Project291_Team3
             movieMain.Show();
             this.Hide();
         }
+
+        private void reportsButton_Click(object sender, EventArgs e)
+        {
+            ReportsForm reportsform = new ReportsForm(myConnection, employeeID);
+            reportsform.Show();
+            this.Hide();
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+
+        }
     }
 }

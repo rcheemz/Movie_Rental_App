@@ -45,13 +45,14 @@
             cityInput = new TextBox();
             stateInput = new TextBox();
             emailInput = new TextBox();
-            phoneInput = new TextBox();
             creditInput = new TextBox();
             createButton = new Button();
             comboBox1 = new ComboBox();
-            label11 = new Label();
             comboBox2 = new ComboBox();
-            button1 = new Button();
+            addPhoneButton = new Button();
+            label11 = new Label();
+            phoneListPanel = new FlowLayoutPanel();
+            phoneInput = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -118,7 +119,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Berlin Sans FB", 9.857143F);
-            label7.Location = new Point(532, 537);
+            label7.Location = new Point(532, 468);
             label7.Name = "label7";
             label7.Size = new Size(215, 26);
             label7.TabIndex = 6;
@@ -148,7 +149,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Berlin Sans FB", 9.857143F);
-            label10.Location = new Point(530, 455);
+            label10.Location = new Point(923, 401);
             label10.Name = "label10";
             label10.Size = new Size(171, 26);
             label10.TabIndex = 9;
@@ -214,18 +215,10 @@
             emailInput.Size = new Size(321, 33);
             emailInput.TabIndex = 17;
             // 
-            // phoneInput
-            // 
-            phoneInput.Font = new Font("Berlin Sans FB", 9.857143F);
-            phoneInput.Location = new Point(530, 417);
-            phoneInput.Name = "phoneInput";
-            phoneInput.Size = new Size(321, 33);
-            phoneInput.TabIndex = 18;
-            // 
             // creditInput
             // 
             creditInput.Font = new Font("Berlin Sans FB", 9.857143F);
-            creditInput.Location = new Point(532, 499);
+            creditInput.Location = new Point(532, 430);
             creditInput.Name = "creditInput";
             creditInput.Size = new Size(321, 33);
             creditInput.TabIndex = 19;
@@ -233,7 +226,7 @@
             // createButton
             // 
             createButton.Font = new Font("Berlin Sans FB", 9.857143F);
-            createButton.Location = new Point(765, 596);
+            createButton.Location = new Point(828, 655);
             createButton.Name = "createButton";
             createButton.Size = new Size(131, 40);
             createButton.TabIndex = 20;
@@ -251,36 +244,50 @@
             comboBox1.TabIndex = 21;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Berlin Sans FB", 9.857143F);
-            label11.Location = new Point(871, 455);
-            label11.Name = "label11";
-            label11.Size = new Size(61, 26);
-            label11.TabIndex = 22;
-            label11.Text = "Type";
-            label11.Click += label11_Click;
-            // 
             // comboBox2
             // 
             comboBox2.Font = new Font("Berlin Sans FB", 9.857143F);
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(871, 414);
+            comboBox2.Location = new Point(921, 430);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(109, 34);
             comboBox2.TabIndex = 23;
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
-            // button1
+            // addPhoneButton
             // 
-            button1.Font = new Font("Berlin Sans FB", 9.857143F);
-            button1.Location = new Point(1002, 412);
-            button1.Name = "button1";
-            button1.Size = new Size(36, 40);
-            button1.TabIndex = 24;
-            button1.Text = "+";
-            button1.UseVisualStyleBackColor = true;
+            addPhoneButton.Location = new Point(1285, 430);
+            addPhoneButton.Name = "addPhoneButton";
+            addPhoneButton.Size = new Size(131, 40);
+            addPhoneButton.TabIndex = 25;
+            addPhoneButton.Text = "Add";
+            addPhoneButton.UseVisualStyleBackColor = true;
+            addPhoneButton.Click += button1_Click_1;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Berlin Sans FB", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label11.Location = new Point(532, 77);
+            label11.Name = "label11";
+            label11.Size = new Size(262, 46);
+            label11.TabIndex = 26;
+            label11.Text = "Customer Info";
+            // 
+            // phoneListPanel
+            // 
+            phoneListPanel.Location = new Point(921, 468);
+            phoneListPanel.Name = "phoneListPanel";
+            phoneListPanel.Size = new Size(350, 175);
+            phoneListPanel.TabIndex = 27;
+            // 
+            // phoneInput
+            // 
+            phoneInput.Font = new Font("Berlin Sans FB", 9.857143F);
+            phoneInput.Location = new Point(1036, 429);
+            phoneInput.Name = "phoneInput";
+            phoneInput.Size = new Size(235, 33);
+            phoneInput.TabIndex = 28;
             // 
             // CreateCustomer
             // 
@@ -288,13 +295,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.NavajoWhite;
             ClientSize = new Size(1667, 780);
-            Controls.Add(button1);
-            Controls.Add(comboBox2);
+            Controls.Add(phoneInput);
+            Controls.Add(phoneListPanel);
             Controls.Add(label11);
+            Controls.Add(addPhoneButton);
+            Controls.Add(comboBox2);
             Controls.Add(comboBox1);
             Controls.Add(createButton);
             Controls.Add(creditInput);
-            Controls.Add(phoneInput);
             Controls.Add(emailInput);
             Controls.Add(stateInput);
             Controls.Add(cityInput);
@@ -338,12 +346,15 @@
         private TextBox cityInput;
         private TextBox stateInput;
         private TextBox emailInput;
-        private TextBox phoneInput;
+        
         private TextBox creditInput;
         private Button createButton;
         private ComboBox comboBox1;
-        private Label label11;
         private ComboBox comboBox2;
-        private Button button1;
+        
+        private Button addPhoneButton;
+        private Label label11;
+        private FlowLayoutPanel phoneListPanel;
+        private TextBox phoneInput;
     }
 }

@@ -6,8 +6,10 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Project291_Team3
 {
@@ -15,13 +17,16 @@ namespace Project291_Team3
     {
         private SqlConnection myConnection;
         private int customerID;
+        private List<(string PhoneNum, string PhoneType)> phoneNumbers = new List<(string, string)>();
         public EditCustomer(SqlConnection connection, int customerID)
         {
             InitializeComponent();
-            LoadDropDownLists();
             myConnection = connection;
             this.customerID = customerID;
+            LoadDropDownLists();
             LoadCustomerData();
+
+
         }
 
         private void LoadCustomerData()
@@ -65,6 +70,120 @@ namespace Project291_Team3
                 reader.Close();
                 myConnection.Close();
             }
+            // Load Phone Numbers
+            string phoneQuery = "SELECT PhoneNum, PhoneType FROM CustomerPhone WHERE CustomerID = @CustomerID";
+            using (SqlCommand cmd = new SqlCommand(phoneQuery, myConnection))
+            {
+                cmd.Parameters.AddWithValue("@CustomerID", customerID);
+
+                myConnection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string phoneNum = reader["PhoneNum"].ToString();
+                    string phoneType = reader["PhoneType"].ToString();
+                    phoneNumbers.Add((phoneNum, phoneType));
+                    AddPhoneToList(phoneNum, phoneType);
+                }
+
+                reader.Close();
+                myConnection.Close();
+            }
+        }
+
+        private void zipInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only letters, numbers, spaces, and limit input to 10 characters
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true; // Block invalid input
+            }
+
+            if (zipInput.Text.Length >= 10 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Block input after 10 characters
+            }
+        }
+
+        private void stateInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only letters (A-Z, a-z) and limit input to 2 characters
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Block non-letter input
+            }
+
+            if (stateInput.Text.Length >= 2 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Block input after 2 characters
+            }
+        }
+
+        private void AddPhoneToList(string phoneNumber, string phoneType)
+        {
+            FlowLayoutPanel phoneListPanel = new FlowLayoutPanel();
+            phoneListPanel.AutoSize = true;
+            phoneListPanel.FlowDirection = FlowDirection.LeftToRight;
+            phoneListPanel.Margin = new Padding(3);
+
+            Label phoneLabel = new Label();
+            phoneLabel.Text = phoneNumber + " (" + phoneType + ")";
+            phoneLabel.AutoSize = true;
+            phoneLabel.Margin = new Padding(3);
+
+            Button removeButton = new Button();
+            removeButton.Text = "X";
+            removeButton.Tag = phoneNumber;
+            removeButton.Size = new Size(20, 20);
+            removeButton.Font = new Font("Arial", 7, FontStyle.Bold);
+            removeButton.TextAlign = ContentAlignment.MiddleCenter;
+            removeButton.Padding = new Padding(0);
+            removeButton.Margin = new Padding(3, 0, 3, 0);
+            removeButton.BackColor = Color.LightCoral;
+            removeButton.ForeColor = Color.White;
+            removeButton.FlatStyle = FlatStyle.Flat;
+            removeButton.Click += RemovePhoneButton_Click;
+
+            phoneListPanel.Controls.Add(phoneLabel);
+            phoneListPanel.Controls.Add(removeButton);
+
+            
+        }
+
+        private void addPhoneButton_Click(object sender, EventArgs e)
+        {
+            string phoneNumber = phoneInput.Text.Trim();
+            string phoneType = comboBox2.SelectedItem.ToString();
+
+            if (!IsValidPhoneNumber(phoneNumber))
+            {
+                MessageBox.Show("Invalid phone number. It must be exactly 10 digits.");
+                return;
+            }
+
+            if (phoneNumbers.Any(p => p.PhoneNum == phoneNumber))
+            {
+                MessageBox.Show("This phone number is already added.");
+                return;
+            }
+
+            phoneNumbers.Add((phoneNumber, phoneType));
+            AddPhoneToList(phoneNumber, phoneType);
+            phoneInput.Text = "";
+        }
+
+        private void RemovePhoneButton_Click(object sender, EventArgs e)
+        {
+            Button removeButton = sender as Button;
+            string phoneNumber = removeButton.Tag.ToString();
+
+            // Remove from phoneNumbers list
+            phoneNumbers.RemoveAll(p => p.PhoneNum == phoneNumber);
+
+            // Remove from UI
+            Control phonePanel = removeButton.Parent;
+            phoneListPanel.Controls.Remove(phonePanel);
         }
 
         private void EditCustomer_Load(object sender, EventArgs e)
@@ -90,6 +209,24 @@ namespace Project291_Team3
             comboBox2.SelectedIndex = 0;
         }
 
+        /**
+         * This function returns a bool to check proper email formatting
+         */
+        private bool IsValidEmail(string email)
+        {
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$"; // Simple email regex xxx@yyy.zzz
+            return Regex.IsMatch(email, pattern);
+        }
+
+        /**
+         * This function returns a bool to check proper phonenumber
+         */
+        private bool IsValidPhoneNumber(string phone)
+        {
+            string pattern = @"^\d{10}$"; // Exactly 10 digits
+            return Regex.IsMatch(phone, pattern);
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(firstNameInput.Text) ||
@@ -102,6 +239,11 @@ namespace Project291_Team3
                 comboBox1.SelectedItem == null)
             {
                 MessageBox.Show("Please fill in all required fields.");
+                return;
+            }
+            if (!IsValidEmail(emailInput.Text))
+            {
+                MessageBox.Show("Invalid email format. Please enter a valid email.");
                 return;
             }
 
@@ -145,5 +287,32 @@ namespace Project291_Team3
             }
         }
 
+        private void addPhoneButton_Click_1(object sender, EventArgs e)
+        {
+            string phoneNumber = phoneInput.Text.Trim();
+            string phoneType = comboBox2.SelectedItem.ToString();
+
+            if (!IsValidPhoneNumber(phoneNumber))
+            {
+                MessageBox.Show("Invalid phone number. It must be exactly 10 digits.");
+                return;
+            }
+
+            if (phoneNumbers.Any(p => p.PhoneNum == phoneNumber))
+            {
+                MessageBox.Show("This phone number is already added.");
+                return;
+            }
+
+            phoneNumbers.Add((phoneNumber, phoneType));
+            AddPhoneToList(phoneNumber, phoneType);
+            phoneInput.Text = "";
+
+        }
+
+        private void phoneListPanel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

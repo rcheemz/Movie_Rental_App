@@ -4,6 +4,9 @@
     <Compile Update="CreateCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="CreateMovieForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="CustomerDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -19,6 +22,9 @@
     <Compile Update="HomePage.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="MovieDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MovieMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -26,6 +32,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="orderPlacementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ReportsForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
