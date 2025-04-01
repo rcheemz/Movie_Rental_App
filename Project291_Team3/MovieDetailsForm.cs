@@ -121,5 +121,98 @@ namespace Project291_Team3
             createMovieForm.ShowDialog();
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show(
+        "Are you sure you want to delete this movie and ALL related data (orders, ratings, actors)?",
+        "Confirm Delete",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Warning);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                try
+                {
+                    if (myConnection.State == ConnectionState.Open)
+                        myConnection.Close();
+
+                    myConnection.Open();
+
+                    // 1. Delete MovieRate where OrderID belongs to this Movie
+                    string deleteMovieRates = @"
+                DELETE FROM MovieRate
+                WHERE OrderID IN (SELECT OrderID FROM RentalOrder WHERE MovieID = @MovieID)";
+                    using (SqlCommand cmd = new SqlCommand(deleteMovieRates, myConnection))
+                    {
+                        cmd.Parameters.AddWithValue("@MovieID", movieID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // 2. Delete ActorRate where OrderID belongs to this Movie
+                    string deleteActorRates = @"
+                DELETE FROM ActorRate
+                WHERE OrderID IN (SELECT OrderID FROM RentalOrder WHERE MovieID = @MovieID)";
+                    using (SqlCommand cmd = new SqlCommand(deleteActorRates, myConnection))
+                    {
+                        cmd.Parameters.AddWithValue("@MovieID", movieID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // Delete CustomerQueue entries where MovieID = @MovieID
+                    string deleteQueue = "DELETE FROM CustomerQueue WHERE MovieID = @MovieID";
+                    using (SqlCommand cmd = new SqlCommand(deleteQueue, myConnection))
+                    {
+                        cmd.Parameters.AddWithValue("@MovieID", movieID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+
+                    // 3. Delete RentalOrder
+                    string deleteOrders = "DELETE FROM RentalOrder WHERE MovieID = @MovieID";
+                    using (SqlCommand cmd = new SqlCommand(deleteOrders, myConnection))
+                    {
+                        cmd.Parameters.AddWithValue("@MovieID", movieID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // 4. Delete MovieActor (optional, if you use it)
+                    string deleteMovieActors = "DELETE FROM MovieActor WHERE MovieID = @MovieID";
+                    using (SqlCommand cmd = new SqlCommand(deleteMovieActors, myConnection))
+                    {
+                        cmd.Parameters.AddWithValue("@MovieID", movieID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // 5. Delete Movie
+                    string deleteMovie = "DELETE FROM Movie WHERE MovieID = @MovieID";
+                    using (SqlCommand cmd = new SqlCommand(deleteMovie, myConnection))
+                    {
+                        cmd.Parameters.AddWithValue("@MovieID", movieID);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Movie and all related data deleted successfully.");
+                            myConnection.Close();
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Delete failed. Movie not found.");
+                        }
+                    }
+
+                    myConnection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error deleting movie: " + ex.Message);
+                    myConnection.Close();
+                }
+            }
+        }
     }
 }

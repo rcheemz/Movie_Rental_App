@@ -97,9 +97,34 @@ namespace Project291_Team3
         {
             try
             {
+                // 1. Check Copies Available
+                string checkQuery = "SELECT NumberOfCopies FROM Movie WHERE MovieID = @MovieID";
+                int copiesAvailable = 0;
+
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, myConnection))
+                {
+                    checkCmd.Parameters.AddWithValue("@MovieID", movieID);
+
+                    if (myConnection.State == ConnectionState.Open)
+                        myConnection.Close();
+
+                    myConnection.Open();
+                    object result = checkCmd.ExecuteScalar();
+                    myConnection.Close();
+
+                    copiesAvailable = result != null ? Convert.ToInt32(result) : 0;
+                }
+
+                if (copiesAvailable <= 0)
+                {
+                    MessageBox.Show("Sorry, there are no copies available for this movie.");
+                    return;
+                }
+
+                // 2. Place Order
                 string query = @"
-                    INSERT INTO RentalOrder (OrderID, CustomerID, MovieID, EmployeeID, CheckoutDateTime)
-                    VALUES (NEXT VALUE FOR RentalOrder_OrderID_Seq, @CustomerID, @MovieID, @EmployeeID, GETDATE())";
+            INSERT INTO RentalOrder (OrderID, CustomerID, MovieID, EmployeeID, CheckoutDateTime)
+            VALUES (NEXT VALUE FOR RentalOrder_OrderID_Seq, @CustomerID, @MovieID, @EmployeeID, GETDATE())";
 
                 using (SqlCommand cmd = new SqlCommand(query, myConnection))
                 {
@@ -107,23 +132,69 @@ namespace Project291_Team3
                     cmd.Parameters.AddWithValue("@MovieID", movieID);
                     cmd.Parameters.AddWithValue("@EmployeeID", employeeID);
 
-                    if (myConnection.State == System.Data.ConnectionState.Open)
-                        myConnection.Close();
-
                     myConnection.Open();
                     cmd.ExecuteNonQuery();
                     myConnection.Close();
-
-                    MessageBox.Show("Order placed successfully!");
-                    this.Close();
                 }
+
+                // 3. Reduce Copies by 1
+                string updateQuery = @"
+            UPDATE Movie
+            SET NumberOfCopies = NumberOfCopies - 1
+            WHERE MovieID = @MovieID";
+
+                using (SqlCommand updateCmd = new SqlCommand(updateQuery, myConnection))
+                {
+                    updateCmd.Parameters.AddWithValue("@MovieID", movieID);
+
+                    myConnection.Open();
+                    updateCmd.ExecuteNonQuery();
+                    myConnection.Close();
+                }
+
+                // 4. Add to CustomerQueue (FIFO)
+                int nextPosition = 1;
+                string getPositionQuery = @"
+            SELECT ISNULL(MAX(QueuePosition), 0) + 1
+            FROM CustomerQueue
+            WHERE CustomerID = @CustomerID";
+
+                using (SqlCommand posCmd = new SqlCommand(getPositionQuery, myConnection))
+                {
+                    posCmd.Parameters.AddWithValue("@CustomerID", customerID);
+
+                    myConnection.Open();
+                    object result = posCmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        nextPosition = Convert.ToInt32(result);
+                    }
+                    myConnection.Close();
+                }
+
+                string insertQueue = @"
+            INSERT INTO CustomerQueue (CustomerID, MovieID, QueuePosition)
+            VALUES (@CustomerID, @MovieID, @QueuePosition)";
+
+                using (SqlCommand queueCmd = new SqlCommand(insertQueue, myConnection))
+                {
+                    queueCmd.Parameters.AddWithValue("@CustomerID", customerID);
+                    queueCmd.Parameters.AddWithValue("@MovieID", movieID);
+                    queueCmd.Parameters.AddWithValue("@QueuePosition", nextPosition);
+
+                    myConnection.Open();
+                    queueCmd.ExecuteNonQuery();
+                    myConnection.Close();
+                }
+
+                MessageBox.Show("Order placed successfully! Movie added to queue.");
+                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error placing order: " + ex.Message);
+                myConnection.Close();
             }
-       
-
         }
     }
-}
+ }

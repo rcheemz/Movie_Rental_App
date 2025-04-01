@@ -41,14 +41,18 @@
             editButton = new Button();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            button1 = new Button();
             tabPage2 = new TabPage();
             newOrder = new Button();
             dataGridView1 = new DataGridView();
+            dataGridViewQueue = new DataGridView();
+            label2 = new Label();
             label1 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewQueue).BeginInit();
             SuspendLayout();
             // 
             // phoneNumberLabel
@@ -175,6 +179,7 @@
             // tabPage1
             // 
             tabPage1.BackColor = Color.NavajoWhite;
+            tabPage1.Controls.Add(button1);
             tabPage1.Controls.Add(accountNumberLabel);
             tabPage1.Controls.Add(editButton);
             tabPage1.Controls.Add(firstNameLabel);
@@ -194,9 +199,23 @@
             tabPage1.Text = "tabPage1";
             tabPage1.Click += tabPage1_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Red;
+            button1.Font = new Font("Berlin Sans FB", 9.857143F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(1427, 640);
+            button1.Name = "button1";
+            button1.Size = new Size(123, 44);
+            button1.TabIndex = 32;
+            button1.Text = "DELETE";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // tabPage2
             // 
             tabPage2.BackColor = Color.NavajoWhite;
+            tabPage2.Controls.Add(dataGridViewQueue);
+            tabPage2.Controls.Add(label2);
             tabPage2.Controls.Add(newOrder);
             tabPage2.Controls.Add(dataGridView1);
             tabPage2.Controls.Add(label1);
@@ -211,7 +230,7 @@
             // newOrder
             // 
             newOrder.Font = new Font("Berlin Sans FB", 14.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            newOrder.Location = new Point(518, 517);
+            newOrder.Location = new Point(269, 619);
             newOrder.Name = "newOrder";
             newOrder.Size = new Size(480, 66);
             newOrder.TabIndex = 2;
@@ -222,22 +241,41 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(359, 161);
+            dataGridView1.Location = new Point(94, 112);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 72;
-            dataGridView1.Size = new Size(796, 314);
+            dataGridView1.Size = new Size(828, 482);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // dataGridViewQueue
+            // 
+            dataGridViewQueue.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewQueue.Location = new Point(1013, 112);
+            dataGridViewQueue.Name = "dataGridViewQueue";
+            dataGridViewQueue.RowHeadersWidth = 72;
+            dataGridViewQueue.Size = new Size(519, 482);
+            dataGridViewQueue.TabIndex = 4;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Berlin Sans FB", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(94, 63);
+            label2.Name = "label2";
+            label2.Size = new Size(253, 46);
+            label2.TabIndex = 3;
+            label2.Text = "Order History";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Berlin Sans FB", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(325, 112);
+            label1.Location = new Point(1013, 63);
             label1.Name = "label1";
-            label1.Size = new Size(253, 46);
+            label1.Size = new Size(136, 46);
             label1.TabIndex = 0;
-            label1.Text = "Order History";
+            label1.Text = "Queue";
             // 
             // CustomerDetailsForm
             // 
@@ -255,6 +293,7 @@
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewQueue).EndInit();
             ResumeLayout(false);
         }
 
@@ -274,8 +313,11 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private Label label1;
         private DataGridView dataGridView1;
         private Button newOrder;
+        private Button button1;
+        private DataGridView dataGridViewQueue;
+        private Label label2;
+        private Label label1;
     }
 }

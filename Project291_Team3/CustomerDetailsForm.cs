@@ -24,7 +24,8 @@ namespace Project291_Team3
             this.employeeID = employeeID;
             LoadCustomerDetails();
             tabPage1.Text = "Customer Info";
-            tabPage2.Text = "Order History";
+            tabPage2.Text = "Orders and Queue";
+            LoadCustomerQueue();
             LoadOrderHistory();
         }
 
@@ -165,6 +166,40 @@ namespace Project291_Team3
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
         }
+        private void LoadCustomerQueue()
+        {
+            string query = @"
+        SELECT 
+            Q.QueuePosition AS [Position],
+            M.MovieName AS [Movie Name]
+        FROM CustomerQueue Q
+        JOIN Movie M ON Q.MovieID = M.MovieID
+        WHERE Q.CustomerID = @CustomerID
+        ORDER BY Q.QueuePosition"; // FIFO Order
+
+            using (SqlCommand cmd = new SqlCommand(query, myConnection))
+            {
+                cmd.Parameters.AddWithValue("@CustomerID", customerID);
+
+                if (myConnection.State == ConnectionState.Open)
+                    myConnection.Close();
+
+                myConnection.Open();
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+
+                myConnection.Close();
+
+                dataGridViewQueue.DataSource = dataTable;
+                dataGridViewQueue.ReadOnly = true;
+                dataGridViewQueue.AllowUserToAddRows = false;
+                dataGridViewQueue.AllowUserToDeleteRows = false;
+                dataGridViewQueue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+        }
+
 
         private void newOrder_Click(object sender, EventArgs e)
         {
@@ -175,6 +210,98 @@ namespace Project291_Team3
         private void tabPage2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show(
+        "Are you sure you want to delete this customer and ALL related data (phones, orders, queue, ratings)?",
+        "Confirm Delete",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Warning);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                try
+                {
+                    if (myConnection.State == ConnectionState.Open)
+                        myConnection.Close();
+
+                    myConnection.Open();
+
+                    // 1. Delete MovieRate where OrderID is from this Customer
+                    string deleteRates = @"
+                DELETE FROM MovieRate
+                WHERE OrderID IN (SELECT OrderID FROM RentalOrder WHERE CustomerID = @CustomerID)";
+                    using (SqlCommand rateCmd = new SqlCommand(deleteRates, myConnection))
+                    {
+                        rateCmd.Parameters.AddWithValue("@CustomerID", customerID);
+                        rateCmd.ExecuteNonQuery();
+                    }
+
+                    // 2. Delete ActorRate where OrderID belongs to this Customer
+                    string deleteActorRates = @"
+                DELETE FROM ActorRate
+                WHERE OrderID IN (SELECT OrderID FROM RentalOrder WHERE CustomerID = @CustomerID)";
+                    using (SqlCommand cmd = new SqlCommand(deleteActorRates, myConnection))
+                    {
+                        cmd.Parameters.AddWithValue("@CustomerID", customerID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // 2. Delete CustomerQueue
+                    string deleteQueue = "DELETE FROM CustomerQueue WHERE CustomerID = @CustomerID";
+                    using (SqlCommand queueCmd = new SqlCommand(deleteQueue, myConnection))
+                    {
+                        queueCmd.Parameters.AddWithValue("@CustomerID", customerID);
+                        queueCmd.ExecuteNonQuery();
+                    }
+
+                    // 3. Delete RentalOrder
+                    string deleteOrders = "DELETE FROM RentalOrder WHERE CustomerID = @CustomerID";
+                    using (SqlCommand orderCmd = new SqlCommand(deleteOrders, myConnection))
+                    {
+                        orderCmd.Parameters.AddWithValue("@CustomerID", customerID);
+                        orderCmd.ExecuteNonQuery();
+                    }
+
+                    // 4. Delete CustomerPhone
+                    string deletePhones = "DELETE FROM CustomerPhone WHERE CustomerID = @CustomerID";
+                    using (SqlCommand phoneCmd = new SqlCommand(deletePhones, myConnection))
+                    {
+                        phoneCmd.Parameters.AddWithValue("@CustomerID", customerID);
+                        phoneCmd.ExecuteNonQuery();
+                    }
+
+                    // 5. Delete Customer
+                    string deleteCustomer = "DELETE FROM Customer WHERE CustomerID = @CustomerID";
+                    using (SqlCommand customerCmd = new SqlCommand(deleteCustomer, myConnection))
+                    {
+                        customerCmd.Parameters.AddWithValue("@CustomerID", customerID);
+                        int rowsAffected = customerCmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Customer and all related data deleted successfully.");
+                            myConnection.Close();
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Delete failed. Customer not found.");
+                        }
+                    }
+
+                    myConnection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error deleting customer: " + ex.Message);
+                    myConnection.Close();
+                }
+            }
         }
     }
 }

@@ -40,6 +40,7 @@
             genreLabel = new Label();
             emailLabel = new Label();
             copiesLabel = new Label();
+            button1 = new Button();
             SuspendLayout();
             // 
             // editButton
@@ -151,12 +152,23 @@
             copiesLabel.TabIndex = 46;
             copiesLabel.Text = "Copies";
             // 
+            // button1
+            // 
+            button1.Location = new Point(1496, 707);
+            button1.Name = "button1";
+            button1.Size = new Size(131, 40);
+            button1.TabIndex = 53;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // MovieDetailsForm
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.NavajoWhite;
             ClientSize = new Size(1667, 780);
+            Controls.Add(button1);
             Controls.Add(editButton);
             Controls.Add(ratingLabel);
             Controls.Add(actorList);
@@ -188,5 +200,6 @@
         private Label genreLabel;
         private Label emailLabel;
         private Label copiesLabel;
+        private Button button1;
     }
 }
