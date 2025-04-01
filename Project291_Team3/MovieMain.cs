@@ -54,18 +54,20 @@ namespace Project291_Team3
 
             if (string.IsNullOrEmpty(movieName))
             {
-                MessageBox.Show("Please enter a movie name.");
+                MessageBox.Show("Please enter a movie name or ID.");
                 return;
             }
 
+            // SQL query to search by MovieName OR MovieID
             string query = @"
                 SELECT MovieID, MovieName, MovieType 
                 FROM Movie
-                WHERE MovieName LIKE @MovieName";
+                WHERE MovieName LIKE @Search
+                   OR CAST(MovieID AS VARCHAR) LIKE @Search";
 
             using (SqlCommand cmd = new SqlCommand(query, myConnection))
             {
-                cmd.Parameters.AddWithValue("@MovieName", "%" + movieName + "%");
+                cmd.Parameters.AddWithValue("@Search", "%" + movieName + "%");
 
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -73,7 +75,7 @@ namespace Project291_Team3
 
                 if (dt.Rows.Count == 0)
                 {
-                    MessageBox.Show("No movies found with this name.");
+                    MessageBox.Show("No movies found with this name or ID.");
                     return;
                 }
 

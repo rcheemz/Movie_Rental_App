@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Button = System.Windows.Forms.Button;
 
 namespace Project291_Team3
 {
@@ -22,6 +24,7 @@ namespace Project291_Team3
         {
             InitializeComponent();
             myConnection = connection;
+            LoadDropDownLists();
         }
 
         public CreateMovieForm(SqlConnection connection, int movieID)
@@ -31,6 +34,7 @@ namespace Project291_Team3
             isEditMode = true;
             editMovieID = movieID;
             LoadMovieDetails();
+            LoadDropDownLists();
         }
 
         private void LoadMovieDetails()
@@ -52,6 +56,13 @@ namespace Project291_Team3
                     movieTypeInput.Text = reader["MovieType"].ToString();
                     feeInput.Text = reader["DistributionFee"].ToString();
                     copiesInput.Text = reader["NumberOfCopies"].ToString();
+                    
+                    // Country ComboBox
+                    string type = reader["MovieType"].ToString();
+                    if (movieTypeComboBox.Items.Contains(type))
+                    {
+                        movieTypeComboBox.SelectedItem = type;
+                    }
                 }
                 reader.Close();
 
@@ -196,7 +207,7 @@ namespace Project291_Team3
         private void saveButton_Click(object sender, EventArgs e)
         {
             string movieName = movieNameInput.Text.Trim();
-            string movieType = movieTypeInput.Text.Trim();
+            string movieType = movieTypeComboBox.SelectedItem.ToString();
             string feeText = feeInput.Text.Trim();
             string copiesText = copiesInput.Text.Trim();
 
@@ -206,6 +217,19 @@ namespace Project291_Team3
                 MessageBox.Show("Please fill in all movie details.");
                 return;
             }
+            // Validate numeric values
+            if (!decimal.TryParse(feeText, out decimal fee) || fee <= 0)
+            {
+                MessageBox.Show("Invalid distribution fee. Please enter a positive number.");
+                return;
+            }
+
+            if (!int.TryParse(copiesText, out int copies) || copies <= 0)
+            {
+                MessageBox.Show("Invalid number of copies. Please enter a positive whole number.");
+                return;
+            }
+
 
             if (selectedActorIDs.Count == 0)
             {
@@ -281,7 +305,27 @@ namespace Project291_Team3
             }
         }
 
+        // Function to populate the country dropdown
+        private void LoadDropDownLists()
+        {
+            // hardcoded list of genres allowed by the database or else it will crash
+
+            string[] countries = {
+            "Action", "Foreign", "Comedy", "Drama"
+            };
+
+            movieTypeComboBox.Items.AddRange(countries); // Add list to ComboBox this is the drop down menu list
+            movieTypeComboBox.SelectedIndex = 0; // Set the default selection to the first item so we will never have null selection
+
+            
+        }
+
         private void CreateMovieForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void movieTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

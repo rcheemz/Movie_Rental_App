@@ -18,7 +18,6 @@
         private void InitializeComponent()
         {
             movieNameInput = new TextBox();
-            movieTypeInput = new TextBox();
             feeInput = new TextBox();
             copiesInput = new TextBox();
             actorSearchInput = new TextBox();
@@ -27,6 +26,7 @@
             addActorButton = new Button();
             selectedActorList = new FlowLayoutPanel();
             saveButton = new Button();
+            movieTypeComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)actorSearchResults).BeginInit();
             SuspendLayout();
             // 
@@ -39,16 +39,6 @@
             movieNameInput.PlaceholderText = "Movie Name";
             movieNameInput.Size = new Size(300, 38);
             movieNameInput.TabIndex = 0;
-            // 
-            // movieTypeInput
-            // 
-            movieTypeInput.Font = new Font("Berlin Sans FB", 12F);
-            movieTypeInput.Location = new Point(435, 226);
-            movieTypeInput.Margin = new Padding(3, 4, 3, 4);
-            movieTypeInput.Name = "movieTypeInput";
-            movieTypeInput.PlaceholderText = "Movie Type";
-            movieTypeInput.Size = new Size(300, 38);
-            movieTypeInput.TabIndex = 1;
             // 
             // feeInput
             // 
@@ -137,12 +127,22 @@
             saveButton.UseVisualStyleBackColor = true;
             saveButton.Click += saveButton_Click;
             // 
+            // movieTypeComboBox
+            // 
+            movieTypeComboBox.FormattingEnabled = true;
+            movieTypeComboBox.Location = new Point(435, 225);
+            movieTypeComboBox.Name = "movieTypeComboBox";
+            movieTypeComboBox.Size = new Size(300, 38);
+            movieTypeComboBox.TabIndex = 10;
+            movieTypeComboBox.SelectedIndexChanged += movieTypeComboBox_SelectedIndexChanged;
+            // 
             // CreateMovieForm
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.PeachPuff;
             ClientSize = new Size(1667, 780);
+            Controls.Add(movieTypeComboBox);
             Controls.Add(saveButton);
             Controls.Add(selectedActorList);
             Controls.Add(addActorButton);
@@ -151,7 +151,6 @@
             Controls.Add(actorSearchInput);
             Controls.Add(copiesInput);
             Controls.Add(feeInput);
-            Controls.Add(movieTypeInput);
             Controls.Add(movieNameInput);
             Margin = new Padding(3, 4, 3, 4);
             Name = "CreateMovieForm";
@@ -165,7 +164,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox movieNameInput;
-        private System.Windows.Forms.TextBox movieTypeInput;
         private System.Windows.Forms.TextBox feeInput;
         private System.Windows.Forms.TextBox copiesInput;
         private System.Windows.Forms.TextBox actorSearchInput;
@@ -174,5 +172,6 @@
         private System.Windows.Forms.Button addActorButton;
         private System.Windows.Forms.FlowLayoutPanel selectedActorList;
         private System.Windows.Forms.Button saveButton;
+        private ComboBox movieTypeComboBox;
     }
 }

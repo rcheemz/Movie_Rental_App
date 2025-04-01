@@ -53,36 +53,33 @@ namespace Project291_Team3
             // check if empty or null
             if (string.IsNullOrEmpty(phoneNumber))
             {
-                MessageBox.Show("Please enter a phone number.");
+                MessageBox.Show("Please enter a phone number or Name");
                 return;
             }
 
-            // SQL Query to find customers by phone number
+            // SQL query to search by phone OR first name OR last name
             string query = @"
-                SELECT c.CustomerID, c.FirstName, c.LastName, p.PhoneNum 
-                FROM Customer c
-                INNER JOIN CustomerPhone p ON c.CustomerID = p.CustomerID
-                WHERE p.PhoneNum LIKE @PhoneNumber";
+        SELECT c.CustomerID, c.FirstName, c.LastName, p.PhoneNum 
+        FROM Customer c
+        INNER JOIN CustomerPhone p ON c.CustomerID = p.CustomerID
+        WHERE p.PhoneNum LIKE @Search
+           OR c.FirstName LIKE @Search
+           OR c.LastName LIKE @Search";
 
-            // create a SqlCommand object to execute the SQL query
-            // uses my connection insure the command is automatically closed after ecxecution
             using (SqlCommand cmd = new SqlCommand(query, myConnection))
             {
-                cmd.Parameters.AddWithValue("@PhoneNumber", "%" + phoneNumber + "%"); // Allows partial search so if you want to search all numbers with 780 etc
+                cmd.Parameters.AddWithValue("@Search", "%" + phoneNumber  + "%"); // Partial search
 
-                // a helper class that fetches data from the database and fills the datatable
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable(); // this is the data table in the app
-                adapter.Fill(dt); // this will fill the datatable list of found customers on the app
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
 
-                // if the data table has no lines that means no customer was found
                 if (dt.Rows.Count == 0)
                 {
-                    MessageBox.Show("No customers found with this phone number.");
+                    MessageBox.Show("No customers found with this phone number or name.");
                     return;
                 }
 
-                // bind results to DataGridView
                 customerDataGridView.DataSource = dt;
             }
 

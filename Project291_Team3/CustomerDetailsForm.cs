@@ -257,6 +257,36 @@ namespace Project291_Team3
                         queueCmd.ExecuteNonQuery();
                     }
 
+                    // 3. Update unreturned rentals: mark as returned & increment movie copies
+                    string getUnreturnedMovies = @"
+                        SELECT MovieID FROM RentalOrder
+                        WHERE CustomerID = @CustomerID AND ReturnDateTime IS NULL";
+
+                    using (SqlCommand getCmd = new SqlCommand(getUnreturnedMovies, myConnection))
+                    {
+                        getCmd.Parameters.AddWithValue("@CustomerID", customerID);
+                        SqlDataReader reader = getCmd.ExecuteReader();
+
+                        List<int> movieIDs = new List<int>();
+                        while (reader.Read())
+                        {
+                            movieIDs.Add(Convert.ToInt32(reader["MovieID"]));
+                        }
+                        reader.Close();
+
+                        foreach (int movieID in movieIDs)
+                        {
+                            // Increment NumberOfCopies
+                            string updateCopies = "UPDATE Movie SET NumberOfCopies = NumberOfCopies + 1 WHERE MovieID = @MovieID";
+                            using (SqlCommand updateCmd = new SqlCommand(updateCopies, myConnection))
+                            {
+                                updateCmd.Parameters.AddWithValue("@MovieID", movieID);
+                                updateCmd.ExecuteNonQuery();
+                            }
+                        }
+                      
+                    }
+
                     // 3. Delete RentalOrder
                     string deleteOrders = "DELETE FROM RentalOrder WHERE CustomerID = @CustomerID";
                     using (SqlCommand orderCmd = new SqlCommand(deleteOrders, myConnection))
