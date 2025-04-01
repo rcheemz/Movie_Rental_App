@@ -44,7 +44,7 @@
             // 
             // editButton
             // 
-            editButton.Location = new Point(669, 561);
+            editButton.Location = new Point(781, 611);
             editButton.Name = "editButton";
             editButton.Size = new Size(131, 40);
             editButton.TabIndex = 52;
@@ -56,7 +56,7 @@
             // 
             ratingLabel.AutoSize = true;
             ratingLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            ratingLabel.Location = new Point(935, 242);
+            ratingLabel.Location = new Point(530, 224);
             ratingLabel.Name = "ratingLabel";
             ratingLabel.Size = new Size(115, 37);
             ratingLabel.TabIndex = 51;
@@ -66,7 +66,7 @@
             // 
             actorList.AutoSize = true;
             actorList.Font = new Font("Berlin Sans FB", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            actorList.Location = new Point(783, 486);
+            actorList.Location = new Point(865, 474);
             actorList.Name = "actorList";
             actorList.Size = new Size(86, 31);
             actorList.TabIndex = 50;
@@ -76,7 +76,7 @@
             // 
             movieNameLabel.AutoSize = true;
             movieNameLabel.Font = new Font("Berlin Sans FB Demi", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            movieNameLabel.Location = new Point(510, 220);
+            movieNameLabel.Location = new Point(519, 162);
             movieNameLabel.Name = "movieNameLabel";
             movieNameLabel.Size = new Size(342, 63);
             movieNameLabel.TabIndex = 42;
@@ -86,7 +86,7 @@
             // 
             lastNameLabel.AutoSize = true;
             lastNameLabel.Font = new Font("Berlin Sans FB Demi", 14.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lastNameLabel.Location = new Point(601, 319);
+            lastNameLabel.Location = new Point(683, 307);
             lastNameLabel.Name = "lastNameLabel";
             lastNameLabel.Size = new Size(114, 38);
             lastNameLabel.TabIndex = 43;
@@ -96,7 +96,7 @@
             // 
             phoneNumberLabel.AutoSize = true;
             phoneNumberLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            phoneNumberLabel.Location = new Point(601, 407);
+            phoneNumberLabel.Location = new Point(683, 395);
             phoneNumberLabel.Name = "phoneNumberLabel";
             phoneNumberLabel.Size = new Size(113, 37);
             phoneNumberLabel.TabIndex = 49;
@@ -116,7 +116,7 @@
             // 
             cityLabel.AutoSize = true;
             cityLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            cityLabel.Location = new Point(915, 336);
+            cityLabel.Location = new Point(964, 345);
             cityLabel.Name = "cityLabel";
             cityLabel.Size = new Size(0, 37);
             cityLabel.TabIndex = 48;
@@ -125,7 +125,7 @@
             // 
             genreLabel.AutoSize = true;
             genreLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            genreLabel.Location = new Point(783, 320);
+            genreLabel.Location = new Point(865, 308);
             genreLabel.Name = "genreLabel";
             genreLabel.Size = new Size(99, 37);
             genreLabel.TabIndex = 45;
@@ -135,7 +135,7 @@
             // 
             emailLabel.AutoSize = true;
             emailLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            emailLabel.Location = new Point(601, 480);
+            emailLabel.Location = new Point(683, 468);
             emailLabel.Name = "emailLabel";
             emailLabel.Size = new Size(159, 37);
             emailLabel.TabIndex = 47;
@@ -145,7 +145,7 @@
             // 
             copiesLabel.AutoSize = true;
             copiesLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            copiesLabel.Location = new Point(783, 407);
+            copiesLabel.Location = new Point(865, 395);
             copiesLabel.Name = "copiesLabel";
             copiesLabel.Size = new Size(106, 37);
             copiesLabel.TabIndex = 46;
@@ -155,6 +155,7 @@
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.NavajoWhite;
             ClientSize = new Size(1667, 780);
             Controls.Add(editButton);
             Controls.Add(ratingLabel);

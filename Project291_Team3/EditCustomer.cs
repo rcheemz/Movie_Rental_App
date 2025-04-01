@@ -18,6 +18,8 @@ namespace Project291_Team3
         private SqlConnection myConnection;
         private int customerID;
         private List<(string PhoneNum, string PhoneType)> phoneNumbers = new List<(string, string)>();
+        private List<string> deletedPhoneNumbers = new List<string>();
+
         public EditCustomer(SqlConnection connection, int customerID)
         {
             InitializeComponent();
@@ -122,10 +124,10 @@ namespace Project291_Team3
 
         private void AddPhoneToList(string phoneNumber, string phoneType)
         {
-            FlowLayoutPanel phoneListPanel = new FlowLayoutPanel();
-            phoneListPanel.AutoSize = true;
-            phoneListPanel.FlowDirection = FlowDirection.LeftToRight;
-            phoneListPanel.Margin = new Padding(3);
+            FlowLayoutPanel phonePanel = new FlowLayoutPanel();
+            phonePanel.AutoSize = true;
+            phonePanel.FlowDirection = FlowDirection.LeftToRight;
+            phonePanel.Margin = new Padding(3);
 
             Label phoneLabel = new Label();
             phoneLabel.Text = phoneNumber + " (" + phoneType + ")";
@@ -145,10 +147,12 @@ namespace Project291_Team3
             removeButton.FlatStyle = FlatStyle.Flat;
             removeButton.Click += RemovePhoneButton_Click;
 
-            phoneListPanel.Controls.Add(phoneLabel);
-            phoneListPanel.Controls.Add(removeButton);
+            phonePanel.Controls.Add(phoneLabel);
+            phonePanel.Controls.Add(removeButton);
 
-            
+            phoneListPanel.Controls.Add(phonePanel);
+
+
         }
 
         private void addPhoneButton_Click(object sender, EventArgs e)
@@ -180,6 +184,9 @@ namespace Project291_Team3
 
             // Remove from phoneNumbers list
             phoneNumbers.RemoveAll(p => p.PhoneNum == phoneNumber);
+
+            // Track for deletion
+            deletedPhoneNumbers.Add(phoneNumber);
 
             // Remove from UI
             Control phonePanel = removeButton.Parent;
@@ -247,43 +254,99 @@ namespace Project291_Team3
                 return;
             }
 
-            string query = @"
-    UPDATE Customer
-    SET FirstName = @FirstName, LastName = @LastName, StreetAddress = @StreetAddress,
-        City = @City, StateOrProvince = @State, Country = @Country, ZipCode = @Zip,
-        Email = @Email, CreditCardNumber = @Credit
-    WHERE CustomerID = @CustomerID";
-
-            using (SqlCommand cmd = new SqlCommand(query, myConnection))
+            try
             {
-                cmd.Parameters.AddWithValue("@FirstName", firstNameInput.Text.Trim());
-                cmd.Parameters.AddWithValue("@LastName", lastNameInput.Text.Trim());
-                cmd.Parameters.AddWithValue("@StreetAddress", streetInput.Text.Trim());
-                cmd.Parameters.AddWithValue("@City", cityInput.Text.Trim());
-                cmd.Parameters.AddWithValue("@State", stateInput.Text.Trim());
-                cmd.Parameters.AddWithValue("@Country", comboBox1.SelectedItem.ToString());
-                cmd.Parameters.AddWithValue("@Zip", zipInput.Text.Trim());
-                cmd.Parameters.AddWithValue("@Email", emailInput.Text.Trim());
-                cmd.Parameters.AddWithValue("@Credit", creditInput.Text.Trim());
-                cmd.Parameters.AddWithValue("@CustomerID", customerID);
+                // 1. Update Customer Info
+                string query = @"
+                    UPDATE Customer
+                    SET FirstName = @FirstName, LastName = @LastName, StreetAddress = @StreetAddress,
+                        City = @City, StateOrProvince = @State, Country = @Country, ZipCode = @Zip,
+                        Email = @Email, CreditCardNumber = @Credit
+                    WHERE CustomerID = @CustomerID";
 
-                if (myConnection.State == System.Data.ConnectionState.Open)
+                using (SqlCommand cmd = new SqlCommand(query, myConnection))
+                {
+                    cmd.Parameters.AddWithValue("@FirstName", firstNameInput.Text.Trim());
+                    cmd.Parameters.AddWithValue("@LastName", lastNameInput.Text.Trim());
+                    cmd.Parameters.AddWithValue("@StreetAddress", streetInput.Text.Trim());
+                    cmd.Parameters.AddWithValue("@City", cityInput.Text.Trim());
+                    cmd.Parameters.AddWithValue("@State", stateInput.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Country", comboBox1.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@Zip", zipInput.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Email", emailInput.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Credit", creditInput.Text.Trim());
+                    cmd.Parameters.AddWithValue("@CustomerID", customerID);
+
+                    if (myConnection.State == ConnectionState.Open)
+                        myConnection.Close();
+
+                    myConnection.Open();
+                    cmd.ExecuteNonQuery();
                     myConnection.Close();
+                }
 
-                myConnection.Open();
-                int rowsAffected = cmd.ExecuteNonQuery();
+                // 2. Delete Removed Phone Numbers
+                foreach (string phoneNum in deletedPhoneNumbers)
+                {
+                    string deleteQuery = "DELETE FROM CustomerPhone WHERE CustomerID = @CustomerID AND PhoneNum = @PhoneNum";
+                    using (SqlCommand deleteCmd = new SqlCommand(deleteQuery, myConnection))
+                    {
+                        deleteCmd.Parameters.AddWithValue("@CustomerID", customerID);
+                        deleteCmd.Parameters.AddWithValue("@PhoneNum", phoneNum);
+
+                        if (myConnection.State == ConnectionState.Open)
+                            myConnection.Close();
+
+                        myConnection.Open();
+                        deleteCmd.ExecuteNonQuery();
+                        myConnection.Close();
+                    }
+                }
+
+                // 3. Insert any new phone numbers
+                foreach (var phone in phoneNumbers)
+                {
+                    string checkQuery = "SELECT COUNT(*) FROM CustomerPhone WHERE CustomerID = @CustomerID AND PhoneNum = @PhoneNum";
+                    using (SqlCommand checkCmd = new SqlCommand(checkQuery, myConnection))
+                    {
+                        checkCmd.Parameters.AddWithValue("@CustomerID", customerID);
+                        checkCmd.Parameters.AddWithValue("@PhoneNum", phone.PhoneNum);
+
+                        if (myConnection.State == ConnectionState.Open)
+                            myConnection.Close();
+
+                        myConnection.Open();
+                        int count = (int)checkCmd.ExecuteScalar();
+                        myConnection.Close();
+
+                        if (count == 0)
+                        {
+                            string insertQuery = "INSERT INTO CustomerPhone (CustomerID, PhoneNum, PhoneType) VALUES (@CustomerID, @PhoneNum, @PhoneType)";
+                            using (SqlCommand insertCmd = new SqlCommand(insertQuery, myConnection))
+                            {
+                                insertCmd.Parameters.AddWithValue("@CustomerID", customerID);
+                                insertCmd.Parameters.AddWithValue("@PhoneNum", phone.PhoneNum);
+                                insertCmd.Parameters.AddWithValue("@PhoneType", phone.PhoneType);
+
+                                if (myConnection.State == ConnectionState.Open)
+                                    myConnection.Close();
+
+                                myConnection.Open();
+                                insertCmd.ExecuteNonQuery();
+                                myConnection.Close();
+                            }
+                        }
+                    }
+                }
+
+                MessageBox.Show("Customer information updated successfully.");
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
                 myConnection.Close();
-
-                if (rowsAffected > 0)
-                {
-                    MessageBox.Show("Customer information updated successfully.");
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Update failed. No changes were made.");
-                }
             }
         }
 

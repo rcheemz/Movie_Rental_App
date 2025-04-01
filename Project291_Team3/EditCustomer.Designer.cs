@@ -52,6 +52,7 @@
             addPhoneButton = new Button();
             label12 = new Label();
             phoneListPanel = new FlowLayoutPanel();
+            label11 = new Label();
             SuspendLayout();
             // 
             // comboBox2
@@ -267,10 +268,21 @@
             // 
             // phoneListPanel
             // 
+            phoneListPanel.BackColor = Color.SeaShell;
             phoneListPanel.Location = new Point(861, 482);
             phoneListPanel.Name = "phoneListPanel";
             phoneListPanel.Size = new Size(350, 175);
             phoneListPanel.TabIndex = 54;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Berlin Sans FB", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label11.Location = new Point(510, 84);
+            label11.Name = "label11";
+            label11.Size = new Size(262, 46);
+            label11.TabIndex = 55;
+            label11.Text = "Customer Info";
             // 
             // EditCustomer
             // 
@@ -278,6 +290,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.NavajoWhite;
             ClientSize = new Size(1667, 780);
+            Controls.Add(label11);
             Controls.Add(phoneListPanel);
             Controls.Add(addPhoneButton);
             Controls.Add(label12);
@@ -334,5 +347,6 @@
         private Button addPhoneButton;
         private Label label12;
         private FlowLayoutPanel phoneListPanel;
+        private Label label11;
     }
 }

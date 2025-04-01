@@ -276,6 +276,7 @@
             // 
             // phoneListPanel
             // 
+            phoneListPanel.BackColor = Color.SeaShell;
             phoneListPanel.Location = new Point(921, 468);
             phoneListPanel.Name = "phoneListPanel";
             phoneListPanel.Size = new Size(350, 175);
