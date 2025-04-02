@@ -53,7 +53,7 @@ namespace Project291_Team3
                 if (reader.Read())
                 {
                     movieNameInput.Text = reader["MovieName"].ToString();
-                    movieTypeInput.Text = reader["MovieType"].ToString();
+                    movieTypeComboBox.SelectedItem = reader["MovieType"].ToString();
                     feeInput.Text = reader["DistributionFee"].ToString();
                     copiesInput.Text = reader["NumberOfCopies"].ToString();
                     

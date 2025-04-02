@@ -14,14 +14,14 @@ namespace Project291_Team3
     public partial class ReportsForm : Form
     {
         private SqlConnection myConnection;
-       
+
         private int employeeID;
         public ReportsForm(SqlConnection connection, int employeeID)
         {
             InitializeComponent();
             myConnection = connection;
             this.employeeID = employeeID;
-            
+
             LoadYearMonthDropdowns();
         }
 
@@ -46,7 +46,7 @@ namespace Project291_Team3
 
 
 
-        private void LoadMonthlySalesReport()
+        private void LoadMonthlySalesReport(int year)
         {
             try
             {
@@ -191,6 +191,11 @@ namespace Project291_Team3
             HomePage homePage = new HomePage(myConnection, employeeID);
             homePage.Show();
             this.Close();
+
+        }
+
+        private void yearInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

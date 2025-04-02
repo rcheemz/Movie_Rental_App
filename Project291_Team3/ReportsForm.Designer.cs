@@ -58,6 +58,7 @@
             yearInput.Name = "yearInput";
             yearInput.Size = new Size(212, 34);
             yearInput.TabIndex = 0;
+            yearInput.SelectedIndexChanged += yearInput_SelectedIndexChanged;
             // 
             // monthInput
             // 

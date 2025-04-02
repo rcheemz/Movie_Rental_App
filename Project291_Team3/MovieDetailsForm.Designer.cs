@@ -41,6 +41,7 @@
             emailLabel = new Label();
             copiesLabel = new Label();
             button1 = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // editButton
@@ -57,7 +58,7 @@
             // 
             ratingLabel.AutoSize = true;
             ratingLabel.Font = new Font("Berlin Sans FB", 14.1428576F);
-            ratingLabel.Location = new Point(530, 224);
+            ratingLabel.Location = new Point(655, 225);
             ratingLabel.Name = "ratingLabel";
             ratingLabel.Size = new Size(115, 37);
             ratingLabel.TabIndex = 51;
@@ -154,13 +155,25 @@
             // 
             // button1
             // 
-            button1.Location = new Point(1496, 707);
+            button1.BackColor = Color.Red;
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(1438, 678);
             button1.Name = "button1";
             button1.Size = new Size(131, 40);
             button1.TabIndex = 53;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            button1.Text = "Delete";
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Berlin Sans FB", 14.1428576F);
+            label1.Location = new Point(534, 225);
+            label1.Name = "label1";
+            label1.Size = new Size(114, 37);
+            label1.TabIndex = 54;
+            label1.Text = "Rating:";
             // 
             // MovieDetailsForm
             // 
@@ -168,6 +181,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.NavajoWhite;
             ClientSize = new Size(1667, 780);
+            Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(editButton);
             Controls.Add(ratingLabel);
@@ -201,5 +215,6 @@
         private Label emailLabel;
         private Label copiesLabel;
         private Button button1;
+        private Label label1;
     }
 }
