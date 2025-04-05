@@ -15,6 +15,8 @@ namespace Project291_Team3
     {
         private SqlConnection myConnection;
         private int employeeID;
+
+        // Constructor for Movie Main
         public MovieMain(SqlConnection connection, int employeeID)
         {
 
@@ -36,6 +38,8 @@ namespace Project291_Team3
             movieDataGridView.ColumnHeadersVisible = false;
 
         }
+
+        // Method for when selected movie from grid
         private void movieDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -48,6 +52,7 @@ namespace Project291_Team3
             }
         }
 
+        // Movie search method
         private void movieSearchButton_Click(object sender, EventArgs e)
         {
             string movieName = movieNameInput.Text.Trim();
@@ -65,6 +70,7 @@ namespace Project291_Team3
                 WHERE MovieName LIKE @Search
                    OR CAST(MovieID AS VARCHAR) LIKE @Search";
 
+            // Sql command for query 
             using (SqlCommand cmd = new SqlCommand(query, myConnection))
             {
                 cmd.Parameters.AddWithValue("@Search", "%" + movieName + "%");
@@ -83,6 +89,7 @@ namespace Project291_Team3
             }
         }
 
+        // Button to go back to home page
         private void back_Click(object sender, EventArgs e)
         {
             HomePage homePage = new HomePage(myConnection, employeeID);
@@ -95,6 +102,7 @@ namespace Project291_Team3
 
         }
 
+        // Button to go to add new movie form
         private void addNewMovie_Click(object sender, EventArgs e)
         {
             CreateMovieForm createMovieForm = new CreateMovieForm(myConnection);

@@ -15,14 +15,22 @@ namespace Project291_Team3
 {
     public partial class CreateCustomer : Form
     {
+        
         private SqlConnection myConnection;
         private List<(string PhoneNum, string PhoneType)> phoneNumbers = new List<(string, string)>();
+
+        // Constructor 
+        // Will take sql connection
         public CreateCustomer(SqlConnection connection)
         {
             InitializeComponent();
+            // Populate countries and phone type comboxes
             LoadDropDownLists();
+
             // get the connection form form1 (previous page)
             myConnection = connection;
+            
+            // call functions to check keys entered in state and zip inputs
             stateInput.KeyPress += new KeyPressEventHandler(stateInput_KeyPress);
             zipInput.KeyPress += new KeyPressEventHandler(zipInput_KeyPress);
         }
@@ -46,6 +54,11 @@ namespace Project291_Team3
         {
 
         }
+
+        /**
+         * This method will handle the input for the zip
+         * @return boolean 
+         */
         private void zipInput_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allow only letters, numbers, spaces, and limit input to 10 characters
@@ -60,6 +73,10 @@ namespace Project291_Team3
             }
         }
 
+        /**
+         * This method will handle the input for the state
+         * @return boolean
+         */
         private void stateInput_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allow only letters (A-Z, a-z) and limit input to 2 characters
@@ -78,7 +95,12 @@ namespace Project291_Team3
         {
             
         }
+        
 
+        /**
+         * This method will remove a phone number from the list of numbers
+         * 
+         */
         private void RemovePhoneButton_Click(object sender, EventArgs e)
         {
             Button removeButton = sender as Button;
@@ -93,9 +115,12 @@ namespace Project291_Team3
         }
 
 
-
+        /**
+         * This method will save the user input to the database in the Customer table and CustomerPhone table
+         */
         private void createButton_Click(object sender, EventArgs e)
         {
+            // try and catch the database connection
             try
             {
                 if (myConnection == null)
@@ -104,14 +129,17 @@ namespace Project291_Team3
                     return;
                 }
 
+                // make sure database is closed in case it wasn't
+                // just good practice
                 if (myConnection.State == ConnectionState.Open)
                 {
                     myConnection.Close();
                 }
-
+                // Debug leave for now
                 myConnection.Open();
                 myConnection.Close();
 
+                // get attributes from user and save as string
                 string firstName = firstNameInput.Text.Trim();
                 string lastName = lastNameInput.Text.Trim();
                 string street = streetInput.Text.Trim();
@@ -122,6 +150,7 @@ namespace Project291_Team3
                 string email = emailInput.Text.Trim();
                 string creditCardNumber = creditInput.Text.Trim();
 
+                // check if the entrys are null or empty
                 if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) ||
                     string.IsNullOrEmpty(street) || string.IsNullOrEmpty(city) ||
                     string.IsNullOrEmpty(state) || string.IsNullOrEmpty(country) ||
@@ -131,20 +160,25 @@ namespace Project291_Team3
                     return;
                 }
 
+                // check if the email is valid
                 if (!IsValidEmail(email))
                 {
                     MessageBox.Show("Invalid email format. Please enter a valid email.");
                     return;
                 }
 
+                // make a new random account number for the customer store as int
                 int accountNumber = new Random().Next(100000, 999999);
 
+                // insert the customer data query
                 string insertCustomerQuery = @"
                     INSERT INTO Customer (CustomerID, FirstName, LastName, StreetAddress, City, StateOrProvince, Country, ZipCode, Email, AccountNumber, CreditCardNumber)
                     VALUES (@CustomerID, @FirstName, @LastName, @Street, @City, @State, @Country, @Zip, @Email, @AccountNumber, @CreditCardNumber)";
 
+                // create new Sql command to insert customer using query
                 using (SqlCommand cmd = new SqlCommand(insertCustomerQuery, myConnection))
                 {
+                    // Insert the data
                     int customerID = new Random().Next(10000, 99999);
 
                     cmd.Parameters.AddWithValue("@CustomerID", customerID);
@@ -160,11 +194,14 @@ namespace Project291_Team3
                     cmd.Parameters.AddWithValue("@CreditCardNumber", string.IsNullOrEmpty(creditCardNumber) ? (object)DBNull.Value : creditCardNumber);
 
                     myConnection.Open();
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery(); // Execute the insert command
                     myConnection.Close();
 
+                    // Make a new query for the phonenumbers
+                    // for each phone number in the list of phonenumbers
                     foreach (var phone in phoneNumbers)
                     {
+                        // create new sql command to isnert each phone number
                         string insertPhoneQuery = "INSERT INTO CustomerPhone (CustomerID, PhoneNum, PhoneType) VALUES (@CustomerID, @PhoneNum, @PhoneType)";
                         using (SqlCommand phoneCmd = new SqlCommand(insertPhoneQuery, myConnection))
                         {
@@ -173,7 +210,7 @@ namespace Project291_Team3
                             phoneCmd.Parameters.AddWithValue("@PhoneType", phone.PhoneType);
 
                             myConnection.Open();
-                            phoneCmd.ExecuteNonQuery();
+                            phoneCmd.ExecuteNonQuery(); // Execute the insert command
                             myConnection.Close();
                         }
                     }
@@ -212,11 +249,12 @@ namespace Project291_Team3
 
         }
 
-        // Function to populate the country dropdown
+        /**
+         * This function will populate the combo boxes
+         */
         private void LoadDropDownLists()
         {
-            // hardcoded list of common countries
-            // i think theres something in vs that has this list already will look into later just for now
+            // Hardcoded list of common countries
             string[] countries = {
             "Canada", "United States", "United Kingdom", "Australia", "Germany", "France", "Italy", "Spain", "Mexico",
             "Brazil", "India", "China", "Japan", "South Korea", "South Africa", "New Zealand", "Russia"
@@ -249,24 +287,31 @@ namespace Project291_Team3
         {
 
         }
-
+        
+        /**
+         * This method will add phonenumber to list of phonenumbers
+         */
         private void button1_Click_1(object sender, EventArgs e)
-        {
+        {   
+            // Get phone number string from user
             string phoneNumber = phoneInput.Text.Trim();
             string phoneType = comboBox2.SelectedItem?.ToString();
 
+            // Check if the number is valid
             if (!IsValidPhoneNumber(phoneNumber))
             {
                 MessageBox.Show("Invalid phone number. It must be exactly 10 digits.");
                 return;
             }
 
+            // Check for dupilcate numbers
             if (phoneNumbers.Any(p => p.PhoneNum == phoneNumber))
             {
                 MessageBox.Show("This phone number is already added.");
                 return;
             }
 
+            // Add to the list of phoneNumbers
             phoneNumbers.Add((phoneNumber, phoneType));
 
             // Create Panel

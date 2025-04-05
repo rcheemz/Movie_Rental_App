@@ -30,7 +30,7 @@ namespace Project291_Team3
 
         private void LoadMovieDetails()
         {
-
+            // Query to get movie details
             string query = @"
                 SELECT 
                     M.MovieID,
@@ -45,6 +45,7 @@ namespace Project291_Team3
                 WHERE M.MovieID = @MovieID
                 GROUP BY M.MovieID, M.MovieName, M.MovieType, M.Rating, M.NumberOfCopies;";
 
+            // Sql command with query
             using (SqlCommand cmd = new SqlCommand(query, myConnection))
             {
                 cmd.Parameters.AddWithValue("@MovieID", movieID);
@@ -53,7 +54,7 @@ namespace Project291_Team3
                     myConnection.Close();
 
                 myConnection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader(); // Execute the query and get the result set
 
                 if (reader.Read())
                 {
@@ -122,6 +123,7 @@ namespace Project291_Team3
 
         }
 
+        // Button to delete movie (rename button)
         private void button1_Click(object sender, EventArgs e)
         {
             var confirmResult = MessageBox.Show(

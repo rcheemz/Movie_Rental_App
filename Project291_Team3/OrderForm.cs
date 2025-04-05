@@ -11,11 +11,14 @@ using System.Windows.Forms;
 
 namespace Project291_Team3
 {
+    // This Form is Basically just the movie main form replicated, Go there for comments
     public partial class OrderForm : Form
     {
         private SqlConnection myConnection;
         private int customerID;
         private int employeeID;
+
+        // Constructor for Order Form
         public OrderForm(SqlConnection connection, int customerID, int employeeID)
         {
             InitializeComponent();
@@ -43,7 +46,7 @@ namespace Project291_Team3
             {
                 int movieID = Convert.ToInt32(orderDataGridView.Rows[e.RowIndex].Cells["MovieID"].Value);
 
-                // ⚠️ Later here you will open an "Order Details" screen to actually place the order
+              
                 OrderPlacementForm orderPlacementForm = new OrderPlacementForm(myConnection, customerID, employeeID, movieID);
                 orderPlacementForm.ShowDialog();
             }

@@ -38,6 +38,7 @@ namespace Project291_Team3
 
         }
 
+        // Take to movie form
         private void movieButton_Click(object sender, EventArgs e)
         {
             MovieMain movieMain = new MovieMain(myConnection, employeeID);
@@ -45,6 +46,7 @@ namespace Project291_Team3
             this.Hide();
         }
 
+        // Take to reports form
         private void reportsButton_Click(object sender, EventArgs e)
         {
             ReportsForm reportsform = new ReportsForm(myConnection, employeeID);
@@ -52,9 +54,15 @@ namespace Project291_Team3
             this.Hide();
         }
 
+        // Exit application
         private void logoutButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
+
+        }
+
+        private void HomePage_Load(object sender, EventArgs e)
+        {
 
         }
     }

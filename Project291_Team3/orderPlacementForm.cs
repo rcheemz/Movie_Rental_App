@@ -20,6 +20,8 @@ namespace Project291_Team3
         private string movieName;
         private string customerName;
         private string employeeName;
+
+        // Constructor for Order Placement Form
         public OrderPlacementForm(SqlConnection sqlConnection, int customerID, int employeeID, int movieID)
         {
             InitializeComponent();
@@ -52,17 +54,18 @@ namespace Project291_Team3
             try
             {
                 // Movie Name
+                // Get the movie name based on MovieID
                 string query1 = "SELECT MovieName FROM Movie WHERE MovieID = @MovieID";
                 using (SqlCommand cmd = new SqlCommand(query1, myConnection))
                 {
                     cmd.Parameters.AddWithValue("@MovieID", movieID);
                     if (myConnection.State == System.Data.ConnectionState.Open)
-                        myConnection.Close();
+                        myConnection.Close(); // Ensure connection is closed before opening
 
                     myConnection.Open();
-                    object result = cmd.ExecuteScalar();
+                    object result = cmd.ExecuteScalar(); // Execute query 
                     movieName = result != null ? result.ToString() : "Unknown";
-                    myConnection.Close();
+                    myConnection.Close(); // Ensure connection is closed before opening
                 }
 
                 // Customer Name
@@ -71,7 +74,7 @@ namespace Project291_Team3
                 {
                     cmd.Parameters.AddWithValue("@CustomerID", customerID);
                     myConnection.Open();
-                    object result = cmd.ExecuteScalar();
+                    object result = cmd.ExecuteScalar(); // Execute query 
                     customerName = result != null ? result.ToString() : "Unknown";
                     myConnection.Close();
                 }
@@ -82,7 +85,7 @@ namespace Project291_Team3
                 {
                     cmd.Parameters.AddWithValue("@EmployeeID", employeeID);
                     myConnection.Open();
-                    object result = cmd.ExecuteScalar();
+                    object result = cmd.ExecuteScalar(); // Execute query 
                     employeeName = result != null ? result.ToString() : "Unknown";
                     myConnection.Close();
                 }
@@ -98,6 +101,7 @@ namespace Project291_Team3
             try
             {
                 // 1. Check Copies Available
+                // Query to get number of copies
                 string checkQuery = "SELECT NumberOfCopies FROM Movie WHERE MovieID = @MovieID";
                 int copiesAvailable = 0;
 
@@ -139,9 +143,9 @@ namespace Project291_Team3
 
                 // 3. Reduce Copies by 1
                 string updateQuery = @"
-            UPDATE Movie
-            SET NumberOfCopies = NumberOfCopies - 1
-            WHERE MovieID = @MovieID";
+                    UPDATE Movie
+                    SET NumberOfCopies = NumberOfCopies - 1
+                    WHERE MovieID = @MovieID";
 
                 using (SqlCommand updateCmd = new SqlCommand(updateQuery, myConnection))
                 {
@@ -155,9 +159,9 @@ namespace Project291_Team3
                 // 4. Add to CustomerQueue (FIFO)
                 int nextPosition = 1;
                 string getPositionQuery = @"
-            SELECT ISNULL(MAX(QueuePosition), 0) + 1
-            FROM CustomerQueue
-            WHERE CustomerID = @CustomerID";
+                    SELECT ISNULL(MAX(QueuePosition), 0) + 1
+                    FROM CustomerQueue
+                    WHERE CustomerID = @CustomerID";
 
                 using (SqlCommand posCmd = new SqlCommand(getPositionQuery, myConnection))
                 {
@@ -172,6 +176,7 @@ namespace Project291_Team3
                     myConnection.Close();
                 }
 
+                // 5. Insert into Queue
                 string insertQueue = @"
             INSERT INTO CustomerQueue (CustomerID, MovieID, QueuePosition)
             VALUES (@CustomerID, @MovieID, @QueuePosition)";

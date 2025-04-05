@@ -15,11 +15,13 @@ namespace Project291_Team3
 {
     public partial class CreateMovieForm : Form
     {
+        // Set attributes for class
         private SqlConnection myConnection;
         private List<int> selectedActorIDs = new List<int>();
         private bool isEditMode = false;
         private int editMovieID;
 
+        // Constructor for creating NEW movie
         public CreateMovieForm(SqlConnection connection)
         {
             InitializeComponent();
@@ -27,16 +29,19 @@ namespace Project291_Team3
             LoadDropDownLists();
         }
 
+        // Constructor for editing an existing movie
         public CreateMovieForm(SqlConnection connection, int movieID)
         {
             InitializeComponent();
             myConnection = connection;
             isEditMode = true;
             editMovieID = movieID;
-            LoadMovieDetails();
+            LoadMovieDetails(); // will load existing movie details
             LoadDropDownLists();
         }
-
+        /**
+         * This method load movie details
+         */
         private void LoadMovieDetails()
         {
             try
@@ -44,12 +49,15 @@ namespace Project291_Team3
                 if (myConnection.State == ConnectionState.Open)
                     myConnection.Close();
 
+                // Make query to get the movie details by MovieID
                 string query = "SELECT MovieName, MovieType, DistributionFee, NumberOfCopies FROM Movie WHERE MovieID = @MovieID";
                 SqlCommand cmd = new SqlCommand(query, myConnection);
                 cmd.Parameters.AddWithValue("@MovieID", editMovieID);
 
                 myConnection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader(); // Execute the SQL command
+                
+                // Insert the data to the inputs
                 if (reader.Read())
                 {
                     movieNameInput.Text = reader["MovieName"].ToString();
@@ -67,6 +75,7 @@ namespace Project291_Team3
                 reader.Close();
 
                 // Load existing actors
+                // Sql query for the actors based on MovieID
                 string actorQuery = "SELECT A.ActorID, A.ActorName FROM MovieActor MA JOIN Actor A ON MA.ActorID = A.ActorID WHERE MA.MovieID = @MovieID";
                 SqlCommand actorCmd = new SqlCommand(actorQuery, myConnection);
                 actorCmd.Parameters.AddWithValue("@MovieID", editMovieID);
@@ -74,6 +83,7 @@ namespace Project291_Team3
                 SqlDataReader actorReader = actorCmd.ExecuteReader();
                 while (actorReader.Read())
                 {
+                    // Insert actor and display on panel
                     int actorID = Convert.ToInt32(actorReader["ActorID"]);
                     string actorName = actorReader["ActorName"].ToString();
                     selectedActorIDs.Add(actorID);
@@ -118,6 +128,9 @@ namespace Project291_Team3
             }
         }
 
+        /**
+         * 
+         */
         private void searchActorButton_Click(object sender, EventArgs e)
         {
             string searchText = actorSearchInput.Text.Trim();
@@ -194,6 +207,9 @@ namespace Project291_Team3
             }
         }
 
+        /**
+         * This method will remove actors for the list on the panel
+         */
         private void RemoveButton_Click(object sender, EventArgs e)
         {
             Button removeButton = sender as Button;
@@ -204,13 +220,17 @@ namespace Project291_Team3
             selectedActorList.Controls.Remove(actorPanel);
         }
 
+        /**
+         * This method will save the data and update or add a new movie to the database
+         */
         private void saveButton_Click(object sender, EventArgs e)
         {
             string movieName = movieNameInput.Text.Trim();
             string movieType = movieTypeComboBox.SelectedItem.ToString();
             string feeText = feeInput.Text.Trim();
             string copiesText = copiesInput.Text.Trim();
-
+            
+            // Check for null or empty inputs
             if (string.IsNullOrEmpty(movieName) || string.IsNullOrEmpty(movieType) ||
                 string.IsNullOrEmpty(feeText) || string.IsNullOrEmpty(copiesText))
             {
@@ -244,11 +264,13 @@ namespace Project291_Team3
 
                 myConnection.Open();
 
+                // If not in edit mode then create new movie id
                 int movieID = isEditMode ? editMovieID : new Random().Next(1000, 9999);
 
+                // If you are in edit mode
                 if (isEditMode)
                 {
-                    // Update Movie
+                    // Update Movie Query
                     string updateMovieQuery = @"
                         UPDATE Movie SET MovieName = @MovieName, MovieType = @MovieType,
                         DistributionFee = @Fee, NumberOfCopies = @Copies WHERE MovieID = @MovieID";
@@ -267,6 +289,7 @@ namespace Project291_Team3
                     deleteCmd.Parameters.AddWithValue("@MovieID", movieID);
                     deleteCmd.ExecuteNonQuery();
                 }
+                // If new movie
                 else
                 {
                     // Insert Movie

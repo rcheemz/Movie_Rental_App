@@ -16,6 +16,9 @@ namespace Project291_Team3
         private SqlConnection myConnection;
         private int customerID;
         private int employeeID;
+
+
+        // Constructor for customer details form
         public CustomerDetailsForm(SqlConnection connection, int customerID, int employeeID)
         {
             InitializeComponent();
@@ -132,6 +135,7 @@ namespace Project291_Team3
         }
         private void LoadOrderHistory()
         {
+            // Query to get order history of customer
             string query = @"
                     SELECT 
                         R.OrderID AS [Order Number],
@@ -168,6 +172,7 @@ namespace Project291_Team3
         }
         private void LoadCustomerQueue()
         {
+            // query to get customer queue
             string query = @"
         SELECT 
             Q.QueuePosition AS [Position],
@@ -201,6 +206,7 @@ namespace Project291_Team3
         }
 
 
+       
         private void newOrder_Click(object sender, EventArgs e)
         {
             OrderForm form = new OrderForm(myConnection, customerID, employeeID);

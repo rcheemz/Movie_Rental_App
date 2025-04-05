@@ -16,12 +16,15 @@ namespace Project291_Team3
         private SqlConnection myConnection;
 
         private int employeeID;
+
+        // Constructor for Reports form
         public ReportsForm(SqlConnection connection, int employeeID)
         {
             InitializeComponent();
             myConnection = connection;
             this.employeeID = employeeID;
 
+            // Load the year and months comboxes
             LoadYearMonthDropdowns();
         }
 
@@ -29,6 +32,7 @@ namespace Project291_Team3
         {
 
         }
+        // Method to populate year and month combox 
         private void LoadYearMonthDropdowns()
         {
             for (int year = 2022; year <= DateTime.Now.Year; year++)
@@ -45,13 +49,20 @@ namespace Project291_Team3
         }
 
 
-
-        private void LoadMonthlySalesReport(int year)
+        /**
+         * Report 1: Monthly Sales Report
+         */
+        private void LoadMonthlySalesReport()
         {
             try
             {
+                // SQL command to call stored procedure
                 string query = "EXEC GetMonthlySalesReport";
+                
+                // Use SqlDataAdapter to execute the command and fill the DataTabl
                 SqlDataAdapter adapter = new SqlDataAdapter(query, myConnection);
+                
+                // Create and fill table
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 monthlySalesGrid.DataSource = dt;
@@ -64,17 +75,26 @@ namespace Project291_Team3
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-
+        
+        /**
+         * Report 2: Top Customers of the month, year
+         */
         private void LoadTopCustomers(int year, int month)
         {
             try
             {
+                // SQL command to call stored procedure
                 string query = "EXEC GetTopCustomersByMonth @Year, @Month";
+
+                // Create the command with the query and connection
                 SqlCommand cmd = new SqlCommand(query, myConnection);
                 cmd.Parameters.AddWithValue("@Year", year);
                 cmd.Parameters.AddWithValue("@Month", month);
-
+                
+                // Use SqlDataAdapter to execute the command and fill the DataTabl
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+                // Create and fill table
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
@@ -89,17 +109,25 @@ namespace Project291_Team3
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-
+        /**
+         * Report 3: Top Movies of the month, year
+         */
         private void LoadTopMovies(int year, int month)
         {
             try
             {
+                // SQL command to call stored procedure
                 string query = "EXEC GetTopMoviesByMonth @Year, @Month";
+
+                // Create the command with the query and connection
                 SqlCommand cmd = new SqlCommand(query, myConnection);
                 cmd.Parameters.AddWithValue("@Year", year);
                 cmd.Parameters.AddWithValue("@Month", month);
 
+                // Use SqlDataAdapter to execute the command and fill the DataTable
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+                // Create and fill table
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 topMoviesGrid.DataSource = dt;
@@ -112,17 +140,26 @@ namespace Project291_Team3
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-
+        
+        /**
+         * Report 4: Number of Rentals per Movie Type(Genre)
+         */
         private void LoadRentalsByType(int year, int month)
         {
             try
             {
+                // SQL command to call stored procedure
                 string query = "EXEC GetRentalsByMovieTypePerMonth @Year, @Month";
+
+                // Create the command with the query and connection
                 SqlCommand cmd = new SqlCommand(query, myConnection);
                 cmd.Parameters.AddWithValue("@Year", year);
                 cmd.Parameters.AddWithValue("@Month", month);
 
+                // Use SqlDataAdapter to execute the command and fill the DataTable
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+                // Create and fill table
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 rentalsByTypeGrid.DataSource = dt;
@@ -135,17 +172,26 @@ namespace Project291_Team3
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-
+        
+        /**
+         * Report 5: Employee sales per month descending order
+         */
         private void LoadEmployeeOfTheMonth(int year, int month)
         {
             try
             {
+                // SQL command to call stored procedure
                 string query = "EXEC GetEmployeeOfTheMonth @Year, @Month";
+
+                // Create the command with the query and connection
                 SqlCommand cmd = new SqlCommand(query, myConnection);
                 cmd.Parameters.AddWithValue("@Year", year);
                 cmd.Parameters.AddWithValue("@Month", month);
 
+                // Use SqlDataAdapter to execute the command and fill the DataTable
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                
+                // Create and fill table
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 employeeOfMonthGrid.DataSource = dt;
@@ -159,6 +205,9 @@ namespace Project291_Team3
             }
         }
 
+        /**
+         * This method will generate the report passing month and year
+         */
         private void generateButton_Click_1(object sender, EventArgs e)
         {
             int year = Convert.ToInt32(yearInput.SelectedItem);

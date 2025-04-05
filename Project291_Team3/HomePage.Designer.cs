@@ -108,6 +108,7 @@
             Controls.Add(customerButton);
             Name = "HomePage";
             Text = "HomePage";
+            Load += HomePage_Load;
             ResumeLayout(false);
             PerformLayout();
         }
